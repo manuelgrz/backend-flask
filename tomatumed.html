@@ -1,0 +1,1223 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tomatumed - Medication Reminders</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom CSS for animations and additional styling */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 18px;
+            height: 18px;
+            background-color: #ef4444;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+        }
+        
+        .medication-card {
+            transition: all 0.2s ease;
+        }
+        
+        .medication-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Login Screen (shown by default) -->
+    <div id="loginScreen" class="fixed inset-0 flex items-center justify-center bg-white z-50 transition-opacity duration-300">
+        <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md fade-in">
+            <div class="flex justify-center mb-6">
+                <div class="bg-red-100 p-4 rounded-full">
+                    <i class="fas fa-pills text-red-500 text-4xl"></i>
+                </div>
+            </div>
+            <h1 class="text-3xl font-bold text-center text-gray-800 mb-2">Tomatumed</h1>
+            <p class="text-gray-600 text-center mb-8">Never miss a medication again</p>
+            
+            <form id="loginForm" class="space-y-4">
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                    <input type="email" id="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
+                </div>
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <input type="password" id="password" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
+                </div>
+                <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-200">
+                    Log In
+                </button>
+            </form>
+            
+            <div class="mt-6 text-center">
+                <p class="text-sm text-gray-600">Don't have an account? <a href="#" id="showSignup" class="text-red-500 hover:text-red-600 font-medium">Sign up</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Screen (hidden by default) -->
+    <div id="signupScreen" class="fixed inset-0 flex items-center justify-center bg-white z-50 transition-opacity duration-300 opacity-0 pointer-events-none">
+        <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md fade-in">
+            <div class="flex justify-center mb-6">
+                <div class="bg-red-100 p-4 rounded-full">
+                    <i class="fas fa-pills text-red-500 text-4xl"></i>
+                </div>
+            </div>
+            <h1 class="text-3xl font-bold text-center text-gray-800 mb-2">Create Account</h1>
+            <p class="text-gray-600 text-center mb-8">Start managing your medications</p>
+            
+            <form id="signupForm" class="space-y-4">
+                <div>
+                    <label for="signupName" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                    <input type="text" id="signupName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
+                </div>
+                <div>
+                    <label for="signupEmail" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                    <input type="email" id="signupEmail" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
+                </div>
+                <div>
+                    <label for="signupPassword" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <input type="password" id="signupPassword" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
+                </div>
+                <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-200">
+                    Sign Up
+                </button>
+            </form>
+            
+            <div class="mt-6 text-center">
+                <p class="text-sm text-gray-600">Already have an account? <a href="#" id="showLogin" class="text-red-500 hover:text-red-600 font-medium">Log in</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App (hidden until logged in) -->
+    <div id="appContainer" class="hidden">
+        <!-- Header -->
+        <header class="bg-white shadow-sm sticky top-0 z-40 dark:bg-gray-800 dark:shadow-gray-700">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center py-4">
+                    <div class="flex items-center">
+                        <i class="fas fa-pills text-red-500 text-2xl mr-2"></i>
+                        <h1 class="text-xl font-bold text-gray-800">Tomatumed</h1>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button id="notificationBtn" class="relative p-2 rounded-full hover:bg-gray-100 transition">
+                            <i class="fas fa-bell text-gray-600"></i>
+                            <span id="notificationCount" class="notification-badge hidden">0</span>
+                        </button>
+                        <button id="profileBtn" class="flex items-center space-x-2 p-2 rounded-full hover:bg-gray-100 transition">
+                            <div class="w-8 h-8 rounded-full bg-red-500 flex items-center justify-center text-white font-medium overflow-hidden">
+                                <span id="profileInitial">U</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Welcome Section -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-1">Welcome back, <span id="userName">User</span>!</h2>
+                <p class="text-gray-600">Here's your medication schedule for today.</p>
+            </div>
+
+            <!-- Current Time and Next Medication -->
+            <div class="bg-white rounded-xl shadow-sm p-6 mb-8">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                    <div class="mb-4 md:mb-0">
+                        <div class="text-sm text-gray-500">Current Time</div>
+                        <div id="currentTime" class="text-3xl font-bold text-gray-800">12:34 PM</div>
+                    </div>
+                    <div id="nextMedicationContainer" class="hidden">
+                        <div class="text-sm text-gray-500">Next Medication</div>
+                        <div class="flex items-center">
+                            <div id="nextMedicationTime" class="text-2xl font-bold text-red-500 mr-3">2:00 PM</div>
+                            <div>
+                                <div id="nextMedicationName" class="font-medium text-gray-800">Ibuprofen</div>
+                                <div id="nextMedicationDose" class="text-sm text-gray-600">200mg</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="noMedications" class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-info-circle text-yellow-400"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm text-yellow-700">
+                                    You don't have any medications scheduled. Add one to get started!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Medication Button -->
+            <div class="flex justify-end mb-6">
+                <button id="addMedicationBtn" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-200 flex items-center">
+                    <i class="fas fa-plus mr-2"></i> Add Medication
+                </button>
+            </div>
+
+            <!-- Medication List -->
+            <div id="medicationList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Medications will be added here dynamically -->
+            </div>
+
+            <!-- Add Medication Modal -->
+            <div id="addMedicationModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+                <div class="bg-white rounded-xl shadow-lg w-full max-w-md mx-4 fade-in">
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold text-gray-800">Add New Medication</h3>
+                            <button id="closeModalBtn" class="text-gray-400 hover:text-gray-500">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <form id="medicationForm" class="space-y-4">
+                            <div>
+                                <label for="medName" class="block text-sm font-medium text-gray-700 mb-1">Medication Name</label>
+                                <input type="text" id="medName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
+                            </div>
+                            <div>
+                                <label for="medDose" class="block text-sm font-medium text-gray-700 mb-1">Dosage</label>
+                                <input type="text" id="medDose" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition" placeholder="e.g., 200mg, 1 tablet">
+                            </div>
+                            <div>
+                                <label for="medTime" class="block text-sm font-medium text-gray-700 mb-1">Time</label>
+                                <input type="time" id="medTime" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
+                            </div>
+                            <div>
+                                <label for="medFrequency" class="block text-sm font-medium text-gray-700 mb-1">Frequency</label>
+                                <select id="medFrequency" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                    <option value="monthly">Monthly</option>
+                                    <option value="as_needed">As Needed</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="medNotes" class="block text-sm font-medium text-gray-700 mb-1">Notes (Optional)</label>
+                                <textarea id="medNotes" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition"></textarea>
+                            </div>
+                            <div class="flex justify-end space-x-3 pt-2">
+                                <button type="button" id="cancelMedicationBtn" class="px-4 py-2 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition">
+                                    Cancel
+                                </button>
+                                <button type="submit" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium transition">
+                                    Add Medication
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notifications Panel -->
+            <div id="notificationsPanel" class="fixed top-16 right-4 bg-white rounded-xl shadow-lg w-80 z-50 hidden fade-in">
+                <div class="p-4 border-b border-gray-200">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-gray-800">Notifications</h3>
+                        <button id="clearNotificationsBtn" class="text-sm text-red-500 hover:text-red-600">Clear All</button>
+                    </div>
+                </div>
+                <div id="notificationsList" class="max-h-96 overflow-y-auto">
+                    <!-- Notifications will be added here dynamically -->
+                    <div class="p-4 text-center text-gray-500">
+                        No new notifications
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Panel -->
+            <div id="profilePanel" class="fixed top-16 right-4 bg-white rounded-xl shadow-lg w-80 z-50 hidden fade-in">
+                <div class="p-6">
+                    <div class="flex flex-col items-center mb-4">
+                        <div class="w-16 h-16 rounded-full bg-red-500 flex items-center justify-center text-white text-2xl font-medium mb-3">
+                            <span id="profilePanelInitial">U</span>
+                        </div>
+                        <h3 id="profilePanelName" class="font-bold text-gray-800 text-lg">User Name</h3>
+                        <p id="profilePanelEmail" class="text-gray-600 text-sm">user@example.com</p>
+                    </div>
+                    <div class="space-y-3">
+                        <a href="#" id="accountSettingsBtn" class="block px-4 py-2 rounded-lg hover:bg-gray-50 text-gray-700 transition">
+                            <i class="fas fa-user mr-3 text-gray-500"></i> Account Settings
+                        </a>
+                        <a href="#" id="preferencesBtn" class="block px-4 py-2 rounded-lg hover:bg-gray-50 text-gray-700 transition dark:hover:bg-gray-700 dark:text-gray-200">
+                            <i class="fas fa-cog mr-3 text-gray-500 dark:text-gray-400"></i> Preferences
+                        </a>
+                        <a href="#" class="block px-4 py-2 rounded-lg hover:bg-gray-50 text-gray-700 transition">
+                            <i class="fas fa-question-circle mr-3 text-gray-500"></i> Help & Support
+                        </a>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-gray-200">
+                        <button id="logoutBtn" class="w-full px-4 py-2 rounded-lg font-medium text-red-500 hover:bg-red-50 transition flex items-center justify-center">
+                            <i class="fas fa-sign-out-alt mr-2"></i> Log Out
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preferences Modal -->
+            <div id="preferencesModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+                <div class="bg-white rounded-xl shadow-lg w-full max-w-md mx-4 fade-in">
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold text-gray-800 dark:text-white">Preferences</h3>
+                            <button id="closePreferencesBtn" class="text-gray-400 hover:text-gray-500 dark:text-gray-300 dark:hover:text-gray-200">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <form id="preferencesForm" class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h4 class="font-medium text-gray-800 dark:text-gray-200">Dark Mode</h4>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Toggle between light and dark theme</p>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" id="darkModeToggle" class="sr-only peer">
+                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 dark:peer-focus:ring-red-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-red-500"></div>
+                                </label>
+                            </div>
+                            
+                            <div class="pt-2">
+                                <h4 class="font-medium text-gray-800 dark:text-gray-200 mb-2">Notification Preferences</h4>
+                                <div class="space-y-3">
+                                    <div class="flex items-center">
+                                        <input id="emailNotifications" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-500 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
+                                        <label for="emailNotifications" class="ml-3 block text-sm text-gray-700 dark:text-gray-300">Email reminders</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="pushNotifications" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-500 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
+                                        <label for="pushNotifications" class="ml-3 block text-sm text-gray-700 dark:text-gray-300">Push notifications</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="soundAlerts" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-500 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
+                                        <label for="soundAlerts" class="ml-3 block text-sm text-gray-700 dark:text-gray-300">Sound alerts</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="vibrationAlerts" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-500 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
+                                        <label for="vibrationAlerts" class="ml-3 block text-sm text-gray-700 dark:text-gray-300">Vibration alerts</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="reminderBefore" type="number" min="0" max="60" class="w-16 px-2 py-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition dark:bg-gray-700 dark:border-gray-600">
+                                        <label for="reminderBefore" class="ml-3 block text-sm text-gray-700 dark:text-gray-300">Remind me (minutes before)</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="pt-2">
+                                <h4 class="font-medium text-gray-800 dark:text-gray-200 mb-2">Profile Photo</h4>
+                                <div class="flex items-center space-x-4">
+                                    <div class="relative">
+                                        <img id="profilePhotoPreview" src="https://ui-avatars.com/api/?name=U&background=ef4444&color=fff" class="w-16 h-16 rounded-full object-cover">
+                                        <input type="file" id="profilePhotoUpload" accept="image/*" class="hidden">
+                                        <button type="button" id="changePhotoBtn" class="absolute -bottom-1 -right-1 bg-red-500 hover:bg-red-600 text-white rounded-full p-1.5">
+                                            <i class="fas fa-camera text-xs"></i>
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <button type="button" id="removePhotoBtn" class="text-sm text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300">
+                                            Remove photo
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-end space-x-3 pt-4">
+                                <button type="button" id="cancelPreferencesBtn" class="px-4 py-2 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-700">
+                                    Cancel
+                                </button>
+                                <button type="submit" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium transition dark:bg-red-600 dark:hover:bg-red-700">
+                                    Save Preferences
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Account Settings Modal -->
+            <div id="accountSettingsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+                <div class="bg-white rounded-xl shadow-lg w-full max-w-md mx-4 fade-in">
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold text-gray-800">Account Settings</h3>
+                            <button id="closeAccountSettingsBtn" class="text-gray-400 hover:text-gray-500">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <form id="accountSettingsForm" class="space-y-4">
+                            <div>
+                                <label for="accountName" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                                <input type="text" id="accountName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
+                            </div>
+                            <div>
+                                <label for="accountEmail" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                <input type="email" id="accountEmail" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
+                            </div>
+                            <div>
+                                <label for="currentPassword" class="block text-sm font-medium text-gray-700 mb-1">Current Password</label>
+                                <input type="password" id="currentPassword" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
+                            </div>
+                            <div>
+                                <label for="newPassword" class="block text-sm font-medium text-gray-700 mb-1">New Password</label>
+                                <input type="password" id="newPassword" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
+                            </div>
+                            <div>
+                                <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-1">Confirm New Password</label>
+                                <input type="password" id="confirmPassword" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
+                            </div>
+                            <div class="flex justify-end space-x-3 pt-2">
+                                <button type="button" id="cancelAccountSettingsBtn" class="px-4 py-2 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition">
+                                    Cancel
+                                </button>
+                                <button type="submit" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium transition">
+                                    Save Changes
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // DOM Elements
+        const loginScreen = document.getElementById('loginScreen');
+        const accountSettingsBtn = document.getElementById('accountSettingsBtn');
+        const accountSettingsModal = document.getElementById('accountSettingsModal');
+        const closeAccountSettingsBtn = document.getElementById('closeAccountSettingsBtn');
+        const cancelAccountSettingsBtn = document.getElementById('cancelAccountSettingsBtn');
+        const accountSettingsForm = document.getElementById('accountSettingsForm');
+        const accountName = document.getElementById('accountName');
+        const accountEmail = document.getElementById('accountEmail');
+        const currentPassword = document.getElementById('currentPassword');
+        const newPassword = document.getElementById('newPassword');
+        const confirmPassword = document.getElementById('confirmPassword');
+        const signupScreen = document.getElementById('signupScreen');
+        const appContainer = document.getElementById('appContainer');
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+        const showSignup = document.getElementById('showSignup');
+        const showLogin = document.getElementById('showLogin');
+        const addMedicationBtn = document.getElementById('addMedicationBtn');
+        const addMedicationModal = document.getElementById('addMedicationModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const cancelMedicationBtn = document.getElementById('cancelMedicationBtn');
+        const medicationForm = document.getElementById('medicationForm');
+        const medicationList = document.getElementById('medicationList');
+        const notificationBtn = document.getElementById('notificationBtn');
+        const notificationsPanel = document.getElementById('notificationsPanel');
+        const notificationsList = document.getElementById('notificationsList');
+        const clearNotificationsBtn = document.getElementById('clearNotificationsBtn');
+        const notificationCount = document.getElementById('notificationCount');
+        const profileBtn = document.getElementById('profileBtn');
+        const profilePanel = document.getElementById('profilePanel');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const userName = document.getElementById('userName');
+        const profileInitial = document.getElementById('profileInitial');
+        const profilePanelInitial = document.getElementById('profilePanelInitial');
+        const profilePanelName = document.getElementById('profilePanelName');
+        const profilePanelEmail = document.getElementById('profilePanelEmail');
+        const currentTime = document.getElementById('currentTime');
+        const nextMedicationContainer = document.getElementById('nextMedicationContainer');
+        const noMedications = document.getElementById('noMedications');
+        const nextMedicationName = document.getElementById('nextMedicationName');
+        const nextMedicationDose = document.getElementById('nextMedicationDose');
+        const nextMedicationTime = document.getElementById('nextMedicationTime');
+
+        // App State
+        let user = null;
+        let medications = [];
+        let notifications = [];
+        let nextMedication = null;
+
+        // Sample medications for demo
+        const sampleMedications = [
+            {
+                id: 1,
+                name: "Ibuprofen",
+                dose: "200mg",
+                time: "08:00",
+                frequency: "daily",
+                notes: "Take with food",
+                taken: false
+            },
+            {
+                id: 2,
+                name: "Vitamin D",
+                dose: "1000 IU",
+                time: "12:00",
+                frequency: "daily",
+                notes: "",
+                taken: false
+            },
+            {
+                id: 3,
+                name: "Antihistamine",
+                dose: "1 tablet",
+                time: "20:00",
+                frequency: "as_needed",
+                notes: "Only when symptoms appear",
+                taken: false
+            }
+        ];
+
+        // Sample notifications for demo
+        const sampleNotifications = [
+            {
+                id: 1,
+                message: "Time to take Ibuprofen (200mg)",
+                time: "2 minutes ago",
+                read: false,
+                medicationId: 1
+            },
+            {
+                id: 2,
+                message: "Don't forget your Vitamin D supplement today",
+                time: "1 hour ago",
+                read: false,
+                medicationId: 2
+            }
+        ];
+
+        // Initialize the app
+        function initApp() {
+            updateCurrentTime();
+            setInterval(updateCurrentTime, 60000); // Update every minute
+            
+            // Check for medication reminders every minute
+            setInterval(checkMedicationReminders, 60000);
+            
+            // Load sample data for demo
+            loadSampleData();
+        }
+
+        // Load sample data for demo purposes
+        function loadSampleData() {
+            medications = [...sampleMedications];
+            notifications = [...sampleNotifications];
+            
+            if (medications.length > 0) {
+                renderMedications();
+                updateNextMedication();
+                noMedications.classList.add('hidden');
+                nextMedicationContainer.classList.remove('hidden');
+            } else {
+                noMedications.classList.remove('hidden');
+                nextMedicationContainer.classList.add('hidden');
+            }
+            
+            updateNotificationCount();
+            renderNotifications();
+        }
+
+        // Update the current time display
+        function updateCurrentTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            currentTime.textContent = timeString;
+        }
+
+        // Render medications to the list
+        function renderMedications() {
+            medicationList.innerHTML = '';
+            
+            // Sort medications by time (earliest first)
+            const sortedMeds = [...medications].sort((a, b) => {
+                return a.time.localeCompare(b.time);
+            });
+            
+            sortedMeds.forEach(med => {
+                const medCard = document.createElement('div');
+                medCard.className = `bg-white rounded-xl shadow-sm p-6 medication-card ${med.taken ? 'opacity-70' : ''}`;
+                
+                const timeParts = med.time.split(':');
+                const hours = parseInt(timeParts[0]);
+                const minutes = parseInt(timeParts[1]);
+                const ampm = hours >= 12 ? 'PM' : 'AM';
+                const displayHours = hours % 12 || 12;
+                const displayTime = `${displayHours}:${minutes.toString().padStart(2, '0')} ${ampm}`;
+                
+                medCard.innerHTML = `
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-800">${med.name}</h3>
+                            <p class="text-gray-600">${med.dose}</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-red-500 font-bold">${displayTime}</div>
+                            <div class="text-xs text-gray-500 capitalize">${med.frequency.replace('_', ' ')}</div>
+                        </div>
+                    </div>
+                    ${med.notes ? `<p class="text-sm text-gray-600 mb-4">${med.notes}</p>` : ''}
+                    <div class="flex justify-between items-center">
+                        <button class="text-sm text-gray-500 hover:text-gray-700" data-med-id="${med.id}" data-action="edit">
+                            <i class="fas fa-edit mr-1"></i> Edit
+                        </button>
+                        <button class="px-3 py-1 rounded-lg ${med.taken ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700 hover:bg-red-200'} transition" data-med-id="${med.id}" data-action="toggle">
+                            ${med.taken ? '<i class="fas fa-check mr-1"></i> Taken' : 'Mark as Taken'}
+                        </button>
+                    </div>
+                `;
+                
+                medicationList.appendChild(medCard);
+            });
+        }
+
+        // Add a new medication
+        function addMedication(medication) {
+            // Generate a unique ID (in a real app, this would come from the server)
+            medication.id = medications.length > 0 ? Math.max(...medications.map(m => m.id)) + 1 : 1;
+            medication.taken = false;
+            
+            // Add to the beginning of the array
+            medications.unshift(medication);
+            
+            // Update UI
+            renderMedications();
+            updateNextMedication();
+            
+            // Hide the "no medications" message if it's shown
+            noMedications.classList.add('hidden');
+            nextMedicationContainer.classList.remove('hidden');
+            
+            // Add a notification
+            addNotification(`Added new medication: ${medication.name} (${medication.dose}) at ${medication.time}`);
+            
+            // Close the modal
+            addMedicationModal.classList.add('hidden');
+            medicationForm.reset();
+        }
+
+        // Toggle medication taken status
+        function toggleMedicationTaken(medId) {
+            const medIndex = medications.findIndex(m => m.id === medId);
+            if (medIndex !== -1) {
+                medications[medIndex].taken = !medications[medIndex].taken;
+                renderMedications();
+                updateNextMedication();
+                
+                const med = medications[medIndex];
+                const action = med.taken ? 'taken' : 'not taken';
+                addNotification(`Marked ${med.name} as ${action}`);
+            }
+        }
+
+        // Update the next medication display
+        function updateNextMedication() {
+            const now = new Date();
+            const currentHours = now.getHours();
+            const currentMinutes = now.getMinutes();
+            
+            // Find the next medication that hasn't been taken yet
+            const upcomingMeds = medications.filter(med => {
+                const [medHours, medMinutes] = med.time.split(':').map(Number);
+                return !med.taken && (
+                    medHours > currentHours || 
+                    (medHours === currentHours && medMinutes > currentMinutes)
+                );
+            });
+            
+            if (upcomingMeds.length > 0) {
+                // Sort by time (earliest first)
+                upcomingMeds.sort((a, b) => {
+                    return a.time.localeCompare(b.time);
+                });
+                
+                nextMedication = upcomingMeds[0];
+                
+                const [hours, minutes] = nextMedication.time.split(':').map(Number);
+                const ampm = hours >= 12 ? 'PM' : 'AM';
+                const displayHours = hours % 12 || 12;
+                const displayTime = `${displayHours}:${minutes.toString().padStart(2, '0')} ${ampm}`;
+                
+                nextMedicationName.textContent = nextMedication.name;
+                nextMedicationDose.textContent = nextMedication.dose;
+                nextMedicationTime.textContent = displayTime;
+                
+                noMedications.classList.add('hidden');
+                nextMedicationContainer.classList.remove('hidden');
+            } else {
+                nextMedication = null;
+                noMedications.classList.remove('hidden');
+                nextMedicationContainer.classList.add('hidden');
+            }
+        }
+
+        // Check for medication reminders
+        function checkMedicationReminders() {
+            if (!nextMedication) return;
+            
+            const now = new Date();
+            const currentHours = now.getHours();
+            const currentMinutes = now.getMinutes();
+            const [medHours, medMinutes] = nextMedication.time.split(':').map(Number);
+            
+            // Check if it's time for the medication (within a 5-minute window)
+            if (Math.abs((currentHours * 60 + currentMinutes) - (medHours * 60 + medMinutes)) <= 5) {
+                // Only notify if we haven't already for this medication today
+                const alreadyNotified = notifications.some(n => 
+                    n.medicationId === nextMedication.id && 
+                    n.message.includes('Time to take') &&
+                    n.time.includes('minute') // Simple check to avoid duplicate same-day notifications
+                );
+                
+                if (!alreadyNotified) {
+                    addNotification(`Time to take ${nextMedication.name} (${nextMedication.dose})`);
+                    
+                    // In a real app, you might also trigger a browser notification here
+                    if (Notification.permission === 'granted') {
+                        new Notification(`Time to take ${nextMedication.name}`, {
+                            body: `Dosage: ${nextMedication.dose}`,
+                            icon: 'https://cdn-icons-png.flaticon.com/512/3146/3146770.png'
+                        });
+                    }
+                }
+            }
+        }
+
+        // Add a notification
+        function addNotification(message) {
+            const now = new Date();
+            const timeString = formatNotificationTime(now);
+            
+            const notification = {
+                id: notifications.length > 0 ? Math.max(...notifications.map(n => n.id)) + 1 : 1,
+                message,
+                time: timeString,
+                read: false,
+                medicationId: null
+            };
+            
+            notifications.unshift(notification);
+            updateNotificationCount();
+            renderNotifications();
+        }
+
+        // Format notification time as "X minutes/hours ago"
+        function formatNotificationTime(date) {
+            const now = new Date();
+            const diffMs = now - date;
+            const diffMins = Math.round(diffMs / 60000);
+            
+            if (diffMins < 1) return 'just now';
+            if (diffMins < 60) return `${diffMins} minute${diffMins === 1 ? '' : 's'} ago`;
+            
+            const diffHours = Math.round(diffMins / 60);
+            if (diffHours < 24) return `${diffHours} hour${diffHours === 1 ? '' : 's'} ago`;
+            
+            const diffDays = Math.round(diffHours / 24);
+            return `${diffDays} day${diffDays === 1 ? '' : 's'} ago`;
+        }
+
+        // Update notification count badge
+        function updateNotificationCount() {
+            const unreadCount = notifications.filter(n => !n.read).length;
+            
+            if (unreadCount > 0) {
+                notificationCount.textContent = unreadCount;
+                notificationCount.classList.remove('hidden');
+                
+                // Add pulse animation to button
+                notificationBtn.classList.add('pulse');
+            } else {
+                notificationCount.classList.add('hidden');
+                notificationBtn.classList.remove('pulse');
+            }
+        }
+
+        // Render notifications
+        function renderNotifications() {
+            notificationsList.innerHTML = '';
+            
+            if (notifications.length === 0) {
+                notificationsList.innerHTML = `
+                    <div class="p-4 text-center text-gray-500">
+                        No new notifications
+                    </div>
+                `;
+                return;
+            }
+            
+            notifications.forEach(notification => {
+                const notificationItem = document.createElement('div');
+                notificationItem.className = `p-4 border-b border-gray-100 ${!notification.read ? 'bg-blue-50' : ''}`;
+                notificationItem.innerHTML = `
+                    <p class="text-sm font-medium ${!notification.read ? 'text-gray-800' : 'text-gray-600'}">${notification.message}</p>
+                    <p class="text-xs text-gray-500 mt-1">${notification.time}</p>
+                `;
+                
+                notificationItem.addEventListener('click', () => {
+                    if (!notification.read) {
+                        notification.read = true;
+                        updateNotificationCount();
+                        notificationItem.classList.remove('bg-blue-50');
+                        notificationItem.querySelector('p').classList.remove('text-gray-800');
+                        notificationItem.querySelector('p').classList.add('text-gray-600');
+                    }
+                });
+                
+                notificationsList.appendChild(notificationItem);
+            });
+        }
+
+        // Clear all notifications
+        function clearNotifications() {
+            notifications = [];
+            updateNotificationCount();
+            renderNotifications();
+        }
+
+        // Login user
+        function loginUser(email, password) {
+            // In a real app, this would be an API call
+            console.log('Logging in with:', email, password);
+            
+            // For demo purposes, create a user
+            user = {
+                name: "Demo User",
+                email: email,
+                initial: email.charAt(0).toUpperCase()
+            };
+            
+            // Update UI
+            userName.textContent = user.name;
+            profileInitial.textContent = user.initial;
+            profilePanelInitial.textContent = user.initial;
+            profilePanelName.textContent = user.name;
+            profilePanelEmail.textContent = user.email;
+            
+            // Hide login screen and show app
+            loginScreen.classList.add('opacity-0', 'pointer-events-none');
+            appContainer.classList.remove('hidden');
+            
+            // Initialize the app
+            initApp();
+            
+            // Request notification permission
+            if (Notification.permission !== 'denied') {
+                Notification.requestPermission();
+            }
+            
+            return true;
+        }
+
+        // Signup user
+        function signupUser(name, email, password) {
+            // In a real app, this would be an API call
+            console.log('Signing up with:', name, email, password);
+            
+            // For demo purposes, log the user in directly
+            return loginUser(email, password);
+        }
+
+        // Logout user
+        function logoutUser() {
+            user = null;
+            medications = [];
+            notifications = [];
+            
+            // Hide app and show login screen
+            appContainer.classList.add('hidden');
+            loginScreen.classList.remove('opacity-0', 'pointer-events-none');
+            
+            // Reset forms
+            loginForm.reset();
+            signupForm.reset();
+        }
+
+        // Event Listeners
+        showSignup.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginScreen.classList.add('opacity-0', 'pointer-events-none');
+            signupScreen.classList.remove('opacity-0', 'pointer-events-none');
+        });
+
+        showLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            signupScreen.classList.add('opacity-0', 'pointer-events-none');
+            loginScreen.classList.remove('opacity-0', 'pointer-events-none');
+        });
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            if (email && password) {
+                loginUser(email, password);
+            }
+        });
+
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            
+            if (name && email && password) {
+                signupUser(name, email, password);
+            }
+        });
+
+        addMedicationBtn.addEventListener('click', () => {
+            addMedicationModal.classList.remove('hidden');
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            addMedicationModal.classList.add('hidden');
+        });
+
+        cancelMedicationBtn.addEventListener('click', () => {
+            addMedicationModal.classList.add('hidden');
+            medicationForm.reset();
+        });
+
+        medicationForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('medName').value;
+            const dose = document.getElementById('medDose').value;
+            const time = document.getElementById('medTime').value;
+            const frequency = document.getElementById('medFrequency').value;
+            const notes = document.getElementById('medNotes').value;
+            
+            addMedication({
+                name,
+                dose,
+                time,
+                frequency,
+                notes
+            });
+        });
+
+        // Delegated event listener for medication actions
+        medicationList.addEventListener('click', (e) => {
+            const button = e.target.closest('button');
+            if (!button) return;
+            
+            const medId = parseInt(button.dataset.medId);
+            const action = button.dataset.action;
+            
+            if (action === 'toggle') {
+                toggleMedicationTaken(medId);
+            } else if (action === 'edit') {
+                // In a real app, implement edit functionality
+                alert('Edit functionality would be implemented here');
+            }
+        });
+
+        notificationBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            profilePanel.classList.add('hidden');
+            notificationsPanel.classList.toggle('hidden');
+        });
+
+        clearNotificationsBtn.addEventListener('click', () => {
+            clearNotifications();
+        });
+
+        profileBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            notificationsPanel.classList.add('hidden');
+            profilePanel.classList.toggle('hidden');
+        });
+
+        logoutBtn.addEventListener('click', () => {
+            logoutUser();
+        });
+
+        // Close panels when clicking outside
+        document.addEventListener('click', () => {
+            notificationsPanel.classList.add('hidden');
+            profilePanel.classList.add('hidden');
+        });
+
+        // Prevent panels from closing when clicking inside them
+        notificationsPanel.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        profilePanel.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // Account Settings Event Listeners
+        accountSettingsBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            profilePanel.classList.add('hidden');
+            accountSettingsModal.classList.remove('hidden');
+            
+            // Populate form with current user data
+            if (user) {
+                accountName.value = user.name;
+                accountEmail.value = user.email;
+            }
+        });
+
+        closeAccountSettingsBtn.addEventListener('click', () => {
+            accountSettingsModal.classList.add('hidden');
+        });
+
+        cancelAccountSettingsBtn.addEventListener('click', () => {
+            accountSettingsModal.classList.add('hidden');
+            accountSettingsForm.reset();
+        });
+
+        accountSettingsForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const name = accountName.value;
+            const email = accountEmail.value;
+            const currentPass = currentPassword.value;
+            const newPass = newPassword.value;
+            const confirmPass = confirmPassword.value;
+            
+            // Simple validation
+            if (newPass && newPass !== confirmPass) {
+                alert("New passwords don't match!");
+                return;
+            }
+            
+            // In a real app, this would be an API call to update the account
+            if (user) {
+                user.name = name;
+                user.email = email;
+                
+                // Update UI
+                userName.textContent = user.name;
+                profileInitial.textContent = user.name.charAt(0).toUpperCase();
+                profilePanelInitial.textContent = user.name.charAt(0).toUpperCase();
+                profilePanelName.textContent = user.name;
+                profilePanelEmail.textContent = user.email;
+                
+                addNotification("Account settings updated successfully");
+            }
+            
+            // Close modal and reset form
+            accountSettingsModal.classList.add('hidden');
+            accountSettingsForm.reset();
+        });
+
+        // Preferences Elements
+        const preferencesBtn = document.getElementById('preferencesBtn');
+        const preferencesModal = document.getElementById('preferencesModal');
+        const closePreferencesBtn = document.getElementById('closePreferencesBtn');
+        const cancelPreferencesBtn = document.getElementById('cancelPreferencesBtn');
+        const preferencesForm = document.getElementById('preferencesForm');
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const profilePhotoPreview = document.getElementById('profilePhotoPreview');
+        const profilePhotoUpload = document.getElementById('profilePhotoUpload');
+        const changePhotoBtn = document.getElementById('changePhotoBtn');
+        const removePhotoBtn = document.getElementById('removePhotoBtn');
+
+        // Check for saved preferences
+        function loadPreferences() {
+            const darkMode = localStorage.getItem('darkMode') === 'true';
+            const emailNotifs = localStorage.getItem('emailNotifs') !== 'false';
+            const pushNotifs = localStorage.getItem('pushNotifs') !== 'false';
+            const soundAlerts = localStorage.getItem('soundAlerts') !== 'false';
+            const vibrationAlerts = localStorage.getItem('vibrationAlerts') === 'true';
+            const reminderBefore = localStorage.getItem('reminderBefore') || '5';
+            const profilePhoto = localStorage.getItem('profilePhoto');
+            
+            // Apply dark mode only if explicitly enabled
+            if (darkMode) {
+                document.documentElement.classList.add('dark');
+                darkModeToggle.checked = true;
+            } else {
+                document.documentElement.classList.remove('dark');
+                darkModeToggle.checked = false;
+            }
+            
+            // Set other preferences
+            document.getElementById('emailNotifications').checked = emailNotifs;
+            document.getElementById('pushNotifications').checked = pushNotifs;
+            document.getElementById('soundAlerts').checked = soundAlerts;
+            document.getElementById('vibrationAlerts').checked = vibrationAlerts;
+            document.getElementById('reminderBefore').value = reminderBefore;
+            
+            // Set profile photo if exists
+            if (profilePhoto) {
+                profilePhotoPreview.src = profilePhoto;
+                const profileImg = document.querySelector('#profileBtn .rounded-full');
+                if (profileImg) {
+                    profileImg.innerHTML = `<img src="${profilePhoto}" class="w-full h-full rounded-full object-cover">`;
+                }
+            }
+        }
+
+        // Save preferences to localStorage
+        function savePreferences() {
+            const isDarkMode = darkModeToggle.checked;
+            localStorage.setItem('darkMode', isDarkMode);
+            localStorage.setItem('emailNotifs', document.getElementById('emailNotifications').checked);
+            localStorage.setItem('pushNotifs', document.getElementById('pushNotifications').checked);
+            localStorage.setItem('soundAlerts', document.getElementById('soundAlerts').checked);
+            localStorage.setItem('vibrationAlerts', document.getElementById('vibrationAlerts').checked);
+            localStorage.setItem('reminderBefore', document.getElementById('reminderBefore').value);
+            
+            // Apply dark mode only if explicitly enabled
+            if (isDarkMode) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+            
+            // Show success message
+            addNotification("Preferences saved successfully");
+            
+            // Update medication reminders with new settings
+            checkMedicationReminders();
+        }
+
+        // Update the checkMedicationReminders function to use preferences
+        function checkMedicationReminders() {
+            if (!nextMedication) return;
+            
+            const now = new Date();
+            const currentHours = now.getHours();
+            const currentMinutes = now.getMinutes();
+            const [medHours, medMinutes] = nextMedication.time.split(':').map(Number);
+            
+            // Get reminder time from preferences
+            const reminderBefore = parseInt(localStorage.getItem('reminderBefore') || '5');
+            
+            // Calculate time difference in minutes
+            const currentTotalMinutes = currentHours * 60 + currentMinutes;
+            const medTotalMinutes = medHours * 60 + medMinutes;
+            const timeDiff = medTotalMinutes - currentTotalMinutes;
+            
+            // Check if it's time for the medication (within reminder window)
+            if (timeDiff >= 0 && timeDiff <= reminderBefore) {
+                // Only notify if we haven't already for this medication today
+                const alreadyNotified = notifications.some(n => 
+                    n.medicationId === nextMedication.id && 
+                    n.message.includes('Time to take') &&
+                    n.time.includes('minute')
+                );
+                
+                if (!alreadyNotified) {
+                    const message = `Time to take ${nextMedication.name} (${nextMedication.dose})`;
+                    addNotification(message);
+                    
+                    // Trigger alerts based on preferences
+                    if (Notification.permission === 'granted' && document.getElementById('pushNotifications').checked) {
+                        new Notification(message, {
+                            body: `Dosage: ${nextMedication.dose}`,
+                            icon: 'https://cdn-icons-png.flaticon.com/512/3146/3146770.png'
+                        });
+                    }
+                    
+                    if (document.getElementById('soundAlerts').checked) {
+                        // Play sound (would need an audio file in a real app)
+                        console.log("Playing alert sound");
+                    }
+                    
+                    if (document.getElementById('vibrationAlerts').checked && 'vibrate' in navigator) {
+                        navigator.vibrate(200);
+                    }
+                }
+            }
+        }
+
+        // Handle profile photo upload
+        changePhotoBtn.addEventListener('click', () => profilePhotoUpload.click());
+        
+        profilePhotoUpload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    profilePhotoPreview.src = event.target.result;
+                    localStorage.setItem('profilePhoto', event.target.result);
+                    
+                    // Update profile button image
+                    const profileImg = document.querySelector('#profileBtn .rounded-full');
+                    if (profileImg) {
+                        profileImg.innerHTML = `<img src="${event.target.result}" class="w-full h-full rounded-full object-cover">`;
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        removePhotoBtn.addEventListener('click', () => {
+            profilePhotoPreview.src = `https://ui-avatars.com/api/?name=${user?.initial || 'U'}&background=ef4444&color=fff`;
+            localStorage.removeItem('profilePhoto');
+            
+            // Revert profile button to initial
+            const profileImg = document.querySelector('#profileBtn .rounded-full');
+            if (profileImg) {
+                profileImg.innerHTML = `<span>${user?.initial || 'U'}</span>`;
+            }
+        });
+
+        // Preferences Event Listeners
+        preferencesBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            profilePanel.classList.add('hidden');
+            preferencesModal.classList.remove('hidden');
+        });
+
+        closePreferencesBtn.addEventListener('click', () => {
+            preferencesModal.classList.add('hidden');
+        });
+
+        cancelPreferencesBtn.addEventListener('click', () => {
+            preferencesModal.classList.add('hidden');
+            loadPreferences(); // Revert any unsaved changes
+        });
+
+        preferencesForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            savePreferences();
+            preferencesModal.classList.add('hidden');
+        });
+
+        // Initialize current time display
+        updateCurrentTime();
+        
+        // Load saved preferences
+        loadPreferences();
+    </script>
+</body>
+</html>
