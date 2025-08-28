@@ -1180,47 +1180,50 @@
         }
 
         // Login user
-        function loginUser(email, password) {
-            // In a real app, this would be an API call
-            console.log('Logging in with:', email, password);
-            
-            // For demo purposes, create a user
-            user = {
-                name: "Demo User",
-                email: email,
-                initial: email.charAt(0).toUpperCase()
-            };
-            
-            // Update UI
-            userName.textContent = user.name;
-            profileInitial.textContent = user.initial;
-            profilePanelInitial.textContent = user.initial;
-            profilePanelName.textContent = user.name;
-            profilePanelEmail.textContent = user.email;
-            
-            // Hide login screen and show app
-            loginScreen.classList.add('opacity-0', 'pointer-events-none');
-            appContainer.classList.remove('hidden');
-            
-            // Initialize the app
-            initApp();
-            
-            // Request notification permission
-            if (Notification.permission !== 'denied') {
-                Notification.requestPermission();
-            }
-            
-            return true;
-        }
+    // ...existing code...
 
-        // Signup user
-        function signupUser(name, email, password) {
-            // In a real app, this would be an API call
-            console.log('Signing up with:', name, email, password);
-            
-            // For demo purposes, log the user in directly
-            return loginUser(email, password);
-        }
+function loginUser(email, password, name = null) {
+    // In a real app, this would be an API call
+    console.log('Logging in with:', email, password);
+
+    // For demo purposes, create a user
+    user = {
+        name: name || "Usuario Demo",
+        email: email,
+        initial: (name ? name.charAt(0) : email.charAt(0)).toUpperCase()
+    };
+
+    // Update UI
+    userName.textContent = user.name;
+    profileInitial.textContent = user.initial;
+    profilePanelInitial.textContent = user.initial;
+    profilePanelName.textContent = user.name;
+    profilePanelEmail.textContent = user.email;
+
+    // Hide login screen and show app
+    loginScreen.classList.add('opacity-0', 'pointer-events-none');
+    appContainer.classList.remove('hidden');
+
+    // Initialize the app
+    initApp();
+
+    // Request notification permission
+    if (Notification.permission !== 'denied') {
+        Notification.requestPermission();
+    }
+
+    return true;
+}
+
+function signupUser(name, email, password) {
+    // In a real app, this would be an API call
+    console.log('Signing up with:', name, email, password);
+
+    // For demo purposes, log the user in directly and pass the name
+    return loginUser(email, password, name);
+}
+
+// ...existing code...
 
         // Logout user
         function logoutUser() {
@@ -1260,16 +1263,19 @@
             }
         });
 
-        signupForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('signupName').value;
-            const email = document.getElementById('signupEmail').value;
-            const password = document.getElementById('signupPassword').value;
-            
-            if (name && email && password) {
-                signupUser(name, email, password);
-            }
-        });
+signupForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('signupName').value;
+    const email = document.getElementById('signupEmail').value;
+    const password = document.getElementById('signupPassword').value;
+    
+    if (name && email && password) {
+        signupUser(name, email, password);
+        // Oculta la pantalla de registro y muestra la app
+        signupScreen.classList.add('opacity-0', 'pointer-events-none');
+        appContainer.classList.remove('hidden');
+    }
+});
 
         addMedicationBtn.addEventListener('click', () => {
             addMedicationModal.classList.remove('hidden');
