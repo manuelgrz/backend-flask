@@ -54,356 +54,702 @@
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen">
-    <!-- Login Screen (shown by default) -->
-    <div id="loginScreen" class="fixed inset-0 flex items-center justify-center bg-white z-50 transition-opacity duration-300">
-        <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md fade-in">
-            <div class="flex justify-center mb-6">
-                <div class="bg-red-100 p-4 rounded-full">
-                    <i class="fas fa-pills text-red-500 text-4xl"></i>
-                </div>
+   <!-- ...existing code... -->
+<!-- Login Screen (shown by default) -->
+<div id="loginScreen" class="fixed inset-0 flex items-center justify-center bg-white z-50 transition-opacity duration-300">
+    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md fade-in">
+        <div class="flex justify-center mb-6">
+            <div class="bg-red-100 p-4 rounded-full">
+                <i class="fas fa-pills text-red-500 text-4xl"></i>
             </div>
-            <h1 class="text-3xl font-bold text-center text-gray-800 mb-2">Tomatumed</h1>
-            <p class="text-gray-600 text-center mb-8">Never miss a medication again</p>
-            
-            <form id="loginForm" class="space-y-4">
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                    <input type="email" id="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
-                </div>
-                <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                    <input type="password" id="password" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
-                </div>
-                <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-200">
-                    Log In
-                </button>
-            
-        <div class="flex items-center mt-4">
-          <input id="darkModeToggle" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-400 border-gray-300 rounded">
-          <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 dark:text-gray-100">
-            Activar modo oscuro
-          </label>
         </div>
-        </form>
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-2">Tomatumed</h1>
+        <p class="text-gray-600 text-center mb-8">Nunca olvides tomar tu medicación de nuevo</p>
         
-            
-            <div class="mt-6 text-center">
-                <p class="text-sm text-gray-600">Don't have an account? <a href="#" id="showSignup" class="text-red-500 hover:text-red-600 font-medium">Sign up</a></p>
+        <form id="loginForm" class="space-y-4">
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
+                <input type="email" id="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition" placeholder="Correo electrónico">
             </div>
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+                <input type="password" id="password" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition" placeholder="Contraseña">
+            </div>
+            <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-200">
+                Iniciar sesión
+            </button>
+        
+    <div class="flex items-center mt-4">
+      <input id="darkModeToggle" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-400 border-gray-300 rounded">
+      <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 dark:text-gray-100">
+        Activar modo oscuro
+      </label>
+    </div>
+    </form>
+    
+        
+        <div class="mt-6 text-center">
+            <p class="text-sm text-gray-600">¿No tienes una cuenta? <a href="#" id="showSignup" class="text-red-500 hover:text-red-600 font-medium">Regístrate</a></p>
         </div>
     </div>
+</div>
 
-    <!-- Signup Screen (hidden by default) -->
-    <div id="signupScreen" class="fixed inset-0 flex items-center justify-center bg-white z-50 transition-opacity duration-300 opacity-0 pointer-events-none">
-        <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md fade-in">
-            <div class="flex justify-center mb-6">
-                <div class="bg-red-100 p-4 rounded-full">
-                    <i class="fas fa-pills text-red-500 text-4xl"></i>
-                </div>
+<!-- Signup Screen (hidden by default) -->
+<div id="signupScreen" class="fixed inset-0 flex items-center justify-center bg-white z-50 transition-opacity duration-300 opacity-0 pointer-events-none">
+    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md fade-in">
+        <div class="flex justify-center mb-6">
+            <div class="bg-red-100 p-4 rounded-full">
+                <i class="fas fa-pills text-red-500 text-4xl"></i>
             </div>
-            <h1 class="text-3xl font-bold text-center text-gray-800 mb-2">Create Account</h1>
-            <p class="text-gray-600 text-center mb-8">Start managing your medications</p>
-            
-            <form id="signupForm" class="space-y-4">
-                <div>
-                    <label for="signupName" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                    <input type="text" id="signupName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
-                </div>
-                <div>
-                    <label for="signupEmail" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                    <input type="email" id="signupEmail" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
-                </div>
-                <div>
-                    <label for="signupPassword" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                    <input type="password" id="signupPassword" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
-                </div>
-                <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-200">
-                    Sign Up
-                </button>
-            
-        <div class="flex items-center mt-4">
-          <input id="darkModeToggle" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-400 border-gray-300 rounded">
-          <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 dark:text-gray-100">
-            Activar modo oscuro
-          </label>
         </div>
-        </form>
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-2">Crear cuenta</h1>
+        <p class="text-gray-600 text-center mb-8">Comienza a gestionar tus medicamentos</p>
         
-            
-            <div class="mt-6 text-center">
-                <p class="text-sm text-gray-600">Already have an account? <a href="#" id="showLogin" class="text-red-500 hover:text-red-600 font-medium">Log in</a></p>
+        <form id="signupForm" class="space-y-4">
+            <div>
+                <label for="signupName" class="block text-sm font-medium text-gray-700 mb-1">Nombre completo</label>
+                <input type="text" id="signupName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition" placeholder="Nombre completo">
             </div>
+            <div>
+                <label for="signupEmail" class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
+                <input type="email" id="signupEmail" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition" placeholder="Correo electrónico">
+            </div>
+            <div>
+                <label for="signupPassword" class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+                <input type="password" id="signupPassword" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition" placeholder="Contraseña">
+            </div>
+            <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-200">
+                Registrarse
+            </button>
+        
+    <div class="flex items-center mt-4">
+      <input id="darkModeToggle" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-400 border-gray-300 rounded">
+      <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 dark:text-gray-100">
+        Activar modo oscuro
+      </label>
+    </div>
+    </form>
+    
+        
+        <div class="mt-6 text-center">
+            <p class="text-sm text-gray-600">¿Ya tienes una cuenta? <a href="#" id="showLogin" class="text-red-500 hover:text-red-600 font-medium">Inicia sesión</a></p>
         </div>
     </div>
+</div>
 
-    <!-- Main App (hidden until logged in) -->
-    <div id="appContainer" class="hidden">
-        <!-- Header -->
-        <header class="bg-white shadow-sm sticky top-0 z-40 dark:bg-gray-800 dark:shadow-gray-700">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between items-center py-4">
+<!-- Main App (hidden until logged in) -->
+<div id="appContainer" class="hidden">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-40 dark:bg-gray-800 dark:shadow-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <i class="fas fa-pills text-red-500 text-2xl mr-2"></i>
+                    <h1 class="text-xl font-bold text-gray-800">Tomatumed</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="notificationBtn" class="relative p-2 rounded-full hover:bg-gray-100 transition">
+                        <i class="fas fa-bell text-gray-600"></i>
+                        <span id="notificationCount" class="notification-badge hidden">0</span>
+                    </button>
+                    <button id="profileBtn" class="flex items-center space-x-2 p-2 rounded-full hover:bg-gray-100 transition">
+                        <div class="w-8 h-8 rounded-full bg-red-500 flex items-center justify-center text-white font-medium overflow-hidden">
+                            <span id="profileInitial">U</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Welcome Section -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-1">¡Bienvenido de nuevo, <span id="userName">Usuario</span>!</h2>
+            <p class="text-gray-600">Este es tu horario de medicación para hoy.</p>
+        </div>
+
+        <!-- Current Time and Next Medication -->
+        <div class="bg-white rounded-xl shadow-sm p-6 mb-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                <div class="mb-4 md:mb-0">
+                    <div class="text-sm text-gray-500">Hora actual</div>
+                    <div id="currentTime" class="text-3xl font-bold text-gray-800">12:34 PM</div>
+                </div>
+                <div id="nextMedicationContainer" class="hidden">
+                    <div class="text-sm text-gray-500">Próxima medicación</div>
                     <div class="flex items-center">
-                        <i class="fas fa-pills text-red-500 text-2xl mr-2"></i>
-                        <h1 class="text-xl font-bold text-gray-800">Tomatumed</h1>
-                    </div>
-                    <div class="flex items-center space-x-4">
-                        <button id="notificationBtn" class="relative p-2 rounded-full hover:bg-gray-100 transition">
-                            <i class="fas fa-bell text-gray-600"></i>
-                            <span id="notificationCount" class="notification-badge hidden">0</span>
-                        </button>
-                        <button id="profileBtn" class="flex items-center space-x-2 p-2 rounded-full hover:bg-gray-100 transition">
-                            <div class="w-8 h-8 rounded-full bg-red-500 flex items-center justify-center text-white font-medium overflow-hidden">
-                                <span id="profileInitial">U</span>
-                            </div>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <!-- Main Content -->
-        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <!-- Welcome Section -->
-            <div class="mb-8">
-                <h2 class="text-2xl font-bold text-gray-800 mb-1">Welcome back, <span id="userName">User</span>!</h2>
-                <p class="text-gray-600">Here's your medication schedule for today.</p>
-            </div>
-
-            <!-- Current Time and Next Medication -->
-            <div class="bg-white rounded-xl shadow-sm p-6 mb-8">
-                <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-                    <div class="mb-4 md:mb-0">
-                        <div class="text-sm text-gray-500">Current Time</div>
-                        <div id="currentTime" class="text-3xl font-bold text-gray-800">12:34 PM</div>
-                    </div>
-                    <div id="nextMedicationContainer" class="hidden">
-                        <div class="text-sm text-gray-500">Next Medication</div>
-                        <div class="flex items-center">
-                            <div id="nextMedicationTime" class="text-2xl font-bold text-red-500 mr-3">2:00 PM</div>
-                            <div>
-                                <div id="nextMedicationName" class="font-medium text-gray-800">Ibuprofen</div>
-                                <div id="nextMedicationDose" class="text-sm text-gray-600">200mg</div>
-                            </div>
+                        <div id="nextMedicationTime" class="text-2xl font-bold text-red-500 mr-3">2:00 PM</div>
+                        <div>
+                            <div id="nextMedicationName" class="font-medium text-gray-800">Ibuprofeno</div>
+                            <div id="nextMedicationDose" class="text-sm text-gray-600">200mg</div>
                         </div>
                     </div>
-                    <div id="noMedications" class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
-                        <div class="flex">
-                            <div class="flex-shrink-0">
-                                <i class="fas fa-info-circle text-yellow-400"></i>
-                            </div>
-                            <div class="ml-3">
-                                <p class="text-sm text-yellow-700">
-                                    You don't have any medications scheduled. Add one to get started!
-                                </p>
-                            </div>
+                </div>
+                <div id="noMedications" class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-info-circle text-yellow-400"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-yellow-700">
+                                No tienes medicamentos programados. ¡Agrega uno para comenzar!
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Add Medication Button -->
-            <div class="flex justify-end mb-6">
-                <button id="addMedicationBtn" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-200 flex items-center">
-                    <i class="fas fa-plus mr-2"></i> Add Medication
-                </button>
-            </div>
-
-            <!-- Medication List -->
-            <div id="medicationList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Medications will be added here dynamically -->
-            </div>
-
-            <!-- Add Medication Modal -->
-            <div id="addMedicationModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-                <div class="bg-white rounded-xl shadow-lg w-full max-w-md mx-4 fade-in">
-                    <div class="p-6">
-                        <div class="flex justify-between items-center mb-4">
-                            <h3 class="text-xl font-bold text-gray-800">Add New Medication</h3>
-                            <button id="closeModalBtn" class="text-gray-400 hover:text-gray-500">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                        <form id="medicationForm" class="space-y-4">
-                            <div>
-                                <label for="medName" class="block text-sm font-medium text-gray-700 mb-1">Medication Name</label>
-                                <input type="text" id="medName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
-                            </div>
-                            <div>
-                                <label for="medDose" class="block text-sm font-medium text-gray-700 mb-1">Dosage</label>
-                                <input type="text" id="medDose" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition" placeholder="e.g., 200mg, 1 tablet">
-                            </div>
-                            <div>
-                                <label for="medTime" class="block text-sm font-medium text-gray-700 mb-1">Time</label>
-                                <input type="time" id="medTime" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
-                            </div>
-                            <div>
-                                <label for="medFrequency" class="block text-sm font-medium text-gray-700 mb-1">Frequency</label>
-                                <select id="medFrequency" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
-                                    <option value="daily">Daily</option>
-                                    <option value="weekly">Weekly</option>
-                                    <option value="monthly">Monthly</option>
-                                    <option value="as_needed">As Needed</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="medNotes" class="block text-sm font-medium text-gray-700 mb-1">Notes (Optional)</label>
-                                <textarea id="medNotes" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition"></textarea>
-                            </div>
-                            <div class="flex justify-end space-x-3 pt-2">
-                                <button type="button" id="cancelMedicationBtn" class="px-4 py-2 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition">
-                                    Cancel
-                                </button>
-                                <button type="submit" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium transition">
-                                    Add Medication
-                                </button>
-                            </div>
-                        
-        <div class="flex items-center mt-4">
-          <input id="darkModeToggle" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-400 border-gray-300 rounded">
-          <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 dark:text-gray-100">
-            Activar modo oscuro
-          </label>
         </div>
-        </form>
-        
-                    </div>
-                </div>
-            </div>
 
-            <!-- Notifications Panel -->
-            <div id="notificationsPanel" class="fixed top-16 right-4 bg-white rounded-xl shadow-lg w-80 z-50 hidden fade-in">
-                <div class="p-4 border-b border-gray-200">
-                    <div class="flex justify-between items-center">
-                        <h3 class="font-bold text-gray-800">Notifications</h3>
-                        <button id="clearNotificationsBtn" class="text-sm text-red-500 hover:text-red-600">Clear All</button>
-                    </div>
-                </div>
-                <div id="notificationsList" class="max-h-96 overflow-y-auto">
-                    <!-- Notifications will be added here dynamically -->
-                    <div class="p-4 text-center text-gray-500">
-                        No new notifications
-                    </div>
-                </div>
-            </div>
+        <!-- Add Medication Button -->
+        <div class="flex justify-end mb-6">
+            <button id="addMedicationBtn" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-200 flex items-center">
+                <i class="fas fa-plus mr-2"></i> Agregar medicamento
+            </button>
+        </div>
 
-            <!-- Profile Panel -->
-            <div id="profilePanel" class="fixed top-16 right-4 bg-white rounded-xl shadow-lg w-80 z-50 hidden fade-in">
+        <!-- Medication List -->
+        <div id="medicationList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Medications will be added here dynamically -->
+        </div>
+
+        <!-- Add Medication Modal -->
+        <div id="addMedicationModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white rounded-xl shadow-lg w-full max-w-md mx-4 fade-in">
                 <div class="p-6">
-                    <div class="flex flex-col items-center mb-4">
-                        <div class="w-16 h-16 rounded-full bg-red-500 flex items-center justify-center text-white text-2xl font-medium mb-3">
-                            <span id="profilePanelInitial">U</span>
-                        </div>
-                        <h3 id="profilePanelName" class="font-bold text-gray-800 text-lg">User Name</h3>
-                        <p id="profilePanelEmail" class="text-gray-600 text-sm">user@example.com</p>
-                    </div>
-                    <div class="space-y-3">
-                        <a href="#" id="accountSettingsBtn" class="block px-4 py-2 rounded-lg hover:bg-gray-50 text-gray-700 transition">
-                            <i class="fas fa-user mr-3 text-gray-500"></i> Account Settings
-                        </a>
-                        <a href="#" id="preferencesBtn" class="block px-4 py-2 rounded-lg hover:bg-gray-50 text-gray-700 transition">
-                            <i class="fas fa-cog mr-3 text-gray-500"></i> Preferences
-                        </a>
-                        <a href="#" id="helpSupportBtn" class="block px-4 py-2 rounded-lg hover:bg-gray-50 text-gray-700 transition">
-                            <i class="fas fa-question-circle mr-3 text-gray-500"></i> Help & Support
-                        </a>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-200">
-                        <button id="logoutBtn" class="w-full px-4 py-2 rounded-lg font-medium text-red-500 hover:bg-red-50 transition flex items-center justify-center">
-                            <i class="fas fa-sign-out-alt mr-2"></i> Log Out
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold text-gray-800">Agregar nuevo medicamento</h3>
+                        <button id="closeModalBtn" class="text-gray-400 hover:text-gray-500">
+                            <i class="fas fa-times"></i>
                         </button>
                     </div>
-                </div>
-            </div>
-
-            <!-- Preferences Modal -->
-            <div id="preferencesModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-                <div class="bg-white rounded-xl shadow-lg w-full max-w-md mx-4 fade-in">
-                    <div class="p-6">
-                        <div class="flex justify-between items-center mb-4">
-                            <h3 class="text-xl font-bold text-gray-800 dark:text-white">Preferences</h3>
-                            <button id="closePreferencesBtn" class="text-gray-400 hover:text-gray-500 dark:text-gray-300 dark:hover:text-gray-200">
-                                <i class="fas fa-times"></i>
+                    <form id="medicationForm" class="space-y-4">
+                        <div>
+                            <label for="medName" class="block text-sm font-medium text-gray-700 mb-1">Nombre del medicamento</label>
+                            <input type="text" id="medName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition" placeholder="Nombre del medicamento">
+                        </div>
+                        <div>
+                            <label for="medDose" class="block text-sm font-medium text-gray-700 mb-1">Dosis</label>
+                            <input type="text" id="medDose" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition" placeholder="Ej: 200mg, 1 tableta">
+                        </div>
+                        <div>
+                            <label for="medTime" class="block text-sm font-medium text-gray-700 mb-1">Hora</label>
+                            <input type="time" id="medTime" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
+                        </div>
+                        <div>
+                            <label for="medFrequency" class="block text-sm font-medium text-gray-700 mb-1">Frecuencia</label>
+                            <select id="medFrequency" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
+                                <option value="daily">Diario</option>
+                                <option value="weekly">Semanal</option>
+                                <option value="monthly">Mensual</option>
+                                <option value="as_needed">Según necesidad</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="medNotes" class="block text-sm font-medium text-gray-700 mb-1">Notas (opcional)</label>
+                            <textarea id="medNotes" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition" placeholder="Notas"></textarea>
+                        </div>
+                        <div class="flex justify-end space-x-3 pt-2">
+                            <button type="button" id="cancelMedicationBtn" class="px-4 py-2 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition">
+                                Cancelar
+                            </button>
+                            <button type="submit" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium transition">
+                                Agregar medicamento
                             </button>
                         </div>
-                        <form id="preferencesForm" class="space-y-4">
-                            <div class="pt-2">
-                                <h4 class="font-medium text-gray-800 dark:text-gray-200 mb-2">Notification Preferences</h4>
-                                <div class="space-y-3">
-                                    <div class="flex items-center">
-                                        <input id="emailNotifications" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-500 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
-                                        <label for="emailNotifications" class="ml-3 block text-sm text-gray-700 dark:text-gray-300">Email reminders</label>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <input id="pushNotifications" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-500 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
-                                        <label for="pushNotifications" class="ml-3 block text-sm text-gray-700 dark:text-gray-300">Push notifications</label>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <input id="soundAlerts" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-500 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
-                                        <label for="soundAlerts" class="ml-3 block text-sm text-gray-700 dark:text-gray-300">Sound alerts</label>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <input id="vibrationAlerts" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-500 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
-                                        <label for="vibrationAlerts" class="ml-3 block text-sm text-gray-700 dark:text-gray-300">Vibration alerts</label>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <input id="reminderBefore" type="number" min="0" max="60" class="w-16 px-2 py-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition dark:bg-gray-700 dark:border-gray-600">
-                                        <label for="reminderBefore" class="ml-3 block text-sm text-gray-700 dark:text-gray-300">Remind me (minutes before)</label>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="pt-2">
-                                <h4 class="font-medium text-gray-800 dark:text-gray-200 mb-2">Profile Photo</h4>
-                                <div class="flex items-center space-x-4">
-                                    <div class="relative">
-                                        <img id="profilePhotoPreview" src="https://ui-avatars.com/api/?name=U&background=ef4444&color=fff" class="w-16 h-16 rounded-full object-cover">
-                                        <input type="file" id="profilePhotoUpload" accept="image/*" class="hidden">
-                                        <button type="button" id="changePhotoBtn" class="absolute -bottom-1 -right-1 bg-red-500 hover:bg-red-600 text-white rounded-full p-1.5">
-                                            <i class="fas fa-camera text-xs"></i>
-                                        </button>
-                                    </div>
-                                    <div>
-                                        <button type="button" id="removePhotoBtn" class="text-sm text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300">
-                                            Remove photo
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="flex justify-end space-x-3 pt-4">
-                                <button type="button" id="cancelPreferencesBtn" class="px-4 py-2 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-700">
-                                    Cancel
-                                </button>
-                                <button type="submit" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium transition dark:bg-red-600 dark:hover:bg-red-700">
-                                    Save Preferences
-                                </button>
-                            </div>
-                        
-        <div class="flex items-center mt-4">
-          <input id="darkModeToggle" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-400 border-gray-300 rounded">
-          <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 dark:text-gray-100">
-            Activar modo oscuro
-          </label>
+                    
+    <div class="flex items-center mt-4">
+      <input id="darkModeToggle" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-400 border-gray-300 rounded">
+      <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 dark:text-gray-100">
+        Activar modo oscuro
+      </label>
+    </div>
+    </form>
+    
+                </div>
+            </div>
         </div>
-        </form>
+
+        <!-- Notifications Panel -->
+        <div id="notificationsPanel" class="fixed top-16 right-4 bg-white rounded-xl shadow-lg w-80 z-50 hidden fade-in">
+            <div class="p-4 border-b border-gray-200">
+                <div class="flex justify-between items-center">
+                    <h3 class="font-bold text-gray-800">Notificaciones</h3>
+                    <button id="clearNotificationsBtn" class="text-sm text-red-500 hover:text-red-600">Borrar todo</button>
+                </div>
+            </div>
+            <div id="notificationsList" class="max-h-96 overflow-y-auto">
+                <!-- Notifications will be added here dynamically -->
+                <div class="p-4 text-center text-gray-500">
+                    No hay notificaciones nuevas
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Panel -->
+        <div id="profilePanel" class="fixed top-16 right-4 bg-white rounded-xl shadow-lg w-80 z-50 hidden fade-in">
+            <div class="p-6">
+                <div class="flex flex-col items-center mb-4">
+                    <div class="w-16 h-16 rounded-full bg-red-500 flex items-center justify-center text-white text-2xl font-medium mb-3">
+                        <span id="profilePanelInitial">U</span>
+                    </div>
+                    <h3 id="profilePanelName" class="font-bold text-gray-800 text-lg">Nombre de usuario</h3>
+                    <p id="profilePanelEmail" class="text-gray-600 text-sm">usuario@ejemplo.com</p>
+                </div>
+                <div class="space-y-3">
+                    <a href="#" id="accountSettingsBtn" class="block px-4 py-2 rounded-lg hover:bg-gray-50 text-gray-700 transition">
+                        <i class="fas fa-user mr-3 text-gray-500"></i> Configuración de cuenta
+                    </a>
+                    <a href="#" id="preferencesBtn" class="block px-4 py-2 rounded-lg hover:bg-gray-50 text-gray-700 transition">
+                        <i class="fas fa-cog mr-3 text-gray-500"></i> Preferencias
+                    </a>
+                    <a href="#" id="helpSupportBtn" class="block px-4 py-2 rounded-lg hover:bg-gray-50 text-gray-700 transition">
+                        <i class="fas fa-question-circle mr-3 text-gray-500"></i> Ayuda y soporte
+                    </a>
+                </div>
+                <div class="mt-6 pt-4 border-t border-gray-200">
+                    <button id="logoutBtn" class="w-full px-4 py-2 rounded-lg font-medium text-red-500 hover:bg-red-50 transition flex items-center justify-center">
+                        <i class="fas fa-sign-out-alt mr-2"></i> Cerrar sesión
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Preferences Modal -->
+        <div id="preferencesModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white rounded-xl shadow-lg w-full max-w-md mx-4 fade-in">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold text-gray-800 dark:text-white">Preferencias</h3>
+                        <button id="closePreferencesBtn" class="text-gray-400 hover:text-gray-500 dark:text-gray-300 dark:hover:text-gray-200">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <form id="preferencesForm" class="space-y-4">
+                        <div class="pt-2">
+                            <h4 class="font-medium text-gray-800 dark:text-gray-200 mb-2">Preferencias de notificación</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-center">
+                                    <input id="emailNotifications" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-500 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="emailNotifications" class="ml-3 block text-sm text-gray-700 dark:text-gray-300">Recordatorios por correo</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="pushNotifications" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-500 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="pushNotifications" class="ml-3 block text-sm text-gray-700 dark:text-gray-300">Notificaciones push</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="soundAlerts" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-500 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="soundAlerts" class="ml-3 block text-sm text-gray-700 dark:text-gray-300">Alertas de sonido</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="vibrationAlerts" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-500 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="vibrationAlerts" class="ml-3 block text-sm text-gray-700 dark:text-gray-300">Alertas de vibración</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="reminderBefore" type="number" min="0" max="60" class="w-16 px-2 py-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="reminderBefore" class="ml-3 block text-sm text-gray-700 dark:text-gray-300">Recordar (minutos antes)</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="pt-2">
+                            <h4 class="font-medium text-gray-800 dark:text-gray-200 mb-2">Foto de perfil</h4>
+                            <div class="flex items-center space-x-4">
+                                <div class="relative">
+                                    <img id="profilePhotoPreview" src="https://ui-avatars.com/api/?name=U&background=ef4444&color=fff" class="w-16 h-16 rounded-full object-cover">
+                                    <input type="file" id="profilePhotoUpload" accept="image/*" class="hidden">
+                                    <button type="button" id="changePhotoBtn" class="absolute -bottom-1 -right-1 bg-red-500 hover:bg-red-600 text-white rounded-full p-1.5">
+                                        <i class="fas fa-camera text-xs"></i>
+                                    </button>
+                                </div>
+                                <div>
+                                    <button type="button" id="removePhotoBtn" class="text-sm text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300">
+                                        Quitar foto
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-end space-x-3 pt-4">
+                            <button type="button" id="cancelPreferencesBtn" class="px-4 py-2 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-700">
+                                Cancelar
+                            </button>
+                            <button type="submit" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium transition dark:bg-red-600 dark:hover:bg-red-700">
+                                Guardar preferencias
+                            </button>
+                        </div>
+                    
+    <div class="flex items-center mt-4">
+      <input id="darkModeToggle" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-400 border-gray-300 rounded">
+      <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 dark:text-gray-100">
+        Activar modo oscuro
+      </label>
+    </div>
+    </form>
+    
+                </div>
+            </div>
+        </div>
+
+        <!-- Account Settings Modal -->
+        <div id="accountSettingsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white rounded-xl shadow-lg w-full max-w-md mx-4 fade-in">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold text-gray-800">Configuración de cuenta</h3>
+<!-- filepath: c:\Users\juanm\OneDrive\Documentos\TOMATUMED\index.html -->
+<!-- ...existing code... -->
+<!-- Login Screen (shown by default) -->
+<div id="loginScreen" class="fixed inset-0 flex items-center justify-center bg-white z-50 transition-opacity duration-300">
+    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md fade-in">
+        <div class="flex justify-center mb-6">
+            <div class="bg-red-100 p-4 rounded-full">
+                <i class="fas fa-pills text-red-500 text-4xl"></i>
+            </div>
+        </div>
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-2">Tomatumed</h1>
+        <p class="text-gray-600 text-center mb-8">Nunca olvides tomar tu medicación de nuevo</p>
         
+        <form id="loginForm" class="space-y-4">
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
+                <input type="email" id="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition" placeholder="Correo electrónico">
+            </div>
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+                <input type="password" id="password" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition" placeholder="Contraseña">
+            </div>
+            <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-200">
+                Iniciar sesión
+            </button>
+        
+    <div class="flex items-center mt-4">
+      <input id="darkModeToggle" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-400 border-gray-300 rounded">
+      <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 dark:text-gray-100">
+        Activar modo oscuro
+      </label>
+    </div>
+    </form>
+    
+        
+        <div class="mt-6 text-center">
+            <p class="text-sm text-gray-600">¿No tienes una cuenta? <a href="#" id="showSignup" class="text-red-500 hover:text-red-600 font-medium">Regístrate</a></p>
+        </div>
+    </div>
+</div>
+
+<!-- Signup Screen (hidden by default) -->
+<div id="signupScreen" class="fixed inset-0 flex items-center justify-center bg-white z-50 transition-opacity duration-300 opacity-0 pointer-events-none">
+    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md fade-in">
+        <div class="flex justify-center mb-6">
+            <div class="bg-red-100 p-4 rounded-full">
+                <i class="fas fa-pills text-red-500 text-4xl"></i>
+            </div>
+        </div>
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-2">Crear cuenta</h1>
+        <p class="text-gray-600 text-center mb-8">Comienza a gestionar tus medicamentos</p>
+        
+        <form id="signupForm" class="space-y-4">
+            <div>
+                <label for="signupName" class="block text-sm font-medium text-gray-700 mb-1">Nombre completo</label>
+                <input type="text" id="signupName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition" placeholder="Nombre completo">
+            </div>
+            <div>
+                <label for="signupEmail" class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
+                <input type="email" id="signupEmail" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition" placeholder="Correo electrónico">
+            </div>
+            <div>
+                <label for="signupPassword" class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+                <input type="password" id="signupPassword" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition" placeholder="Contraseña">
+            </div>
+            <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-200">
+                Registrarse
+            </button>
+        
+    <div class="flex items-center mt-4">
+      <input id="darkModeToggle" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-400 border-gray-300 rounded">
+      <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 dark:text-gray-100">
+        Activar modo oscuro
+      </label>
+    </div>
+    </form>
+    
+        
+        <div class="mt-6 text-center">
+            <p class="text-sm text-gray-600">¿Ya tienes una cuenta? <a href="#" id="showLogin" class="text-red-500 hover:text-red-600 font-medium">Inicia sesión</a></p>
+        </div>
+    </div>
+</div>
+
+<!-- Main App (hidden until logged in) -->
+<div id="appContainer" class="hidden">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-40 dark:bg-gray-800 dark:shadow-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <i class="fas fa-pills text-red-500 text-2xl mr-2"></i>
+                    <h1 class="text-xl font-bold text-gray-800">Tomatumed</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="notificationBtn" class="relative p-2 rounded-full hover:bg-gray-100 transition">
+                        <i class="fas fa-bell text-gray-600"></i>
+                        <span id="notificationCount" class="notification-badge hidden">0</span>
+                    </button>
+                    <button id="profileBtn" class="flex items-center space-x-2 p-2 rounded-full hover:bg-gray-100 transition">
+                        <div class="w-8 h-8 rounded-full bg-red-500 flex items-center justify-center text-white font-medium overflow-hidden">
+                            <span id="profileInitial">U</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Welcome Section -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-1">¡Bienvenido de nuevo, <span id="userName">Usuario</span>!</h2>
+            <p class="text-gray-600">Este es tu horario de medicación para hoy.</p>
+        </div>
+
+        <!-- Current Time and Next Medication -->
+        <div class="bg-white rounded-xl shadow-sm p-6 mb-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                <div class="mb-4 md:mb-0">
+                    <div class="text-sm text-gray-500">Hora actual</div>
+                    <div id="currentTime" class="text-3xl font-bold text-gray-800">12:34 PM</div>
+                </div>
+                <div id="nextMedicationContainer" class="hidden">
+                    <div class="text-sm text-gray-500">Próxima medicación</div>
+                    <div class="flex items-center">
+                        <div id="nextMedicationTime" class="text-2xl font-bold text-red-500 mr-3">2:00 PM</div>
+                        <div>
+                            <div id="nextMedicationName" class="font-medium text-gray-800">Ibuprofeno</div>
+                            <div id="nextMedicationDose" class="text-sm text-gray-600">200mg</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="noMedications" class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-info-circle text-yellow-400"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-yellow-700">
+                                No tienes medicamentos programados. ¡Agrega uno para comenzar!
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Account Settings Modal -->
-            <div id="accountSettingsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-                <div class="bg-white rounded-xl shadow-lg w-full max-w-md mx-4 fade-in">
-                    <div class="p-6">
-                        <div class="flex justify-between items-center mb-4">
-                            <h3 class="text-xl font-bold text-gray-800">Account Settings</h3>
+        <!-- Add Medication Button -->
+        <div class="flex justify-end mb-6">
+            <button id="addMedicationBtn" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-200 flex items-center">
+                <i class="fas fa-plus mr-2"></i> Agregar medicamento
+            </button>
+        </div>
+
+        <!-- Medication List -->
+        <div id="medicationList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Medications will be added here dynamically -->
+        </div>
+
+        <!-- Add Medication Modal -->
+        <div id="addMedicationModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white rounded-xl shadow-lg w-full max-w-md mx-4 fade-in">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold text-gray-800">Agregar nuevo medicamento</h3>
+                        <button id="closeModalBtn" class="text-gray-400 hover:text-gray-500">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <form id="medicationForm" class="space-y-4">
+                        <div>
+                            <label for="medName" class="block text-sm font-medium text-gray-700 mb-1">Nombre del medicamento</label>
+                            <input type="text" id="medName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition" placeholder="Nombre del medicamento">
+                        </div>
+                        <div>
+                            <label for="medDose" class="block text-sm font-medium text-gray-700 mb-1">Dosis</label>
+                            <input type="text" id="medDose" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition" placeholder="Ej: 200mg, 1 tableta">
+                        </div>
+                        <div>
+                            <label for="medTime" class="block text-sm font-medium text-gray-700 mb-1">Hora</label>
+                            <input type="time" id="medTime" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
+                        </div>
+                        <div>
+                            <label for="medFrequency" class="block text-sm font-medium text-gray-700 mb-1">Frecuencia</label>
+                            <select id="medFrequency" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
+                                <option value="daily">Diario</option>
+                                <option value="weekly">Semanal</option>
+                                <option value="monthly">Mensual</option>
+                                <option value="as_needed">Según necesidad</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="medNotes" class="block text-sm font-medium text-gray-700 mb-1">Notas (opcional)</label>
+                            <textarea id="medNotes" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition" placeholder="Notas"></textarea>
+                        </div>
+                        <div class="flex justify-end space-x-3 pt-2">
+                            <button type="button" id="cancelMedicationBtn" class="px-4 py-2 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition">
+                                Cancelar
+                            </button>
+                            <button type="submit" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium transition">
+                                Agregar medicamento
+                            </button>
+                        </div>
+                    
+    <div class="flex items-center mt-4">
+      <input id="darkModeToggle" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-400 border-gray-300 rounded">
+      <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 dark:text-gray-100">
+        Activar modo oscuro
+      </label>
+    </div>
+    </form>
+    
+                </div>
+            </div>
+        </div>
+
+        <!-- Notifications Panel -->
+        <div id="notificationsPanel" class="fixed top-16 right-4 bg-white rounded-xl shadow-lg w-80 z-50 hidden fade-in">
+            <div class="p-4 border-b border-gray-200">
+                <div class="flex justify-between items-center">
+                    <h3 class="font-bold text-gray-800">Notificaciones</h3>
+                    <button id="clearNotificationsBtn" class="text-sm text-red-500 hover:text-red-600">Borrar todo</button>
+                </div>
+            </div>
+            <div id="notificationsList" class="max-h-96 overflow-y-auto">
+                <!-- Notifications will be added here dynamically -->
+                <div class="p-4 text-center text-gray-500">
+                    No hay notificaciones nuevas
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Panel -->
+        <div id="profilePanel" class="fixed top-16 right-4 bg-white rounded-xl shadow-lg w-80 z-50 hidden fade-in">
+            <div class="p-6">
+                <div class="flex flex-col items-center mb-4">
+                    <div class="w-16 h-16 rounded-full bg-red-500 flex items-center justify-center text-white text-2xl font-medium mb-3">
+                        <span id="profilePanelInitial">U</span>
+                    </div>
+                    <h3 id="profilePanelName" class="font-bold text-gray-800 text-lg">Nombre de usuario</h3>
+                    <p id="profilePanelEmail" class="text-gray-600 text-sm">usuario@ejemplo.com</p>
+                </div>
+                <div class="space-y-3">
+                    <a href="#" id="accountSettingsBtn" class="block px-4 py-2 rounded-lg hover:bg-gray-50 text-gray-700 transition">
+                        <i class="fas fa-user mr-3 text-gray-500"></i> Configuración de cuenta
+                    </a>
+                    <a href="#" id="preferencesBtn" class="block px-4 py-2 rounded-lg hover:bg-gray-50 text-gray-700 transition">
+                        <i class="fas fa-cog mr-3 text-gray-500"></i> Preferencias
+                    </a>
+                    <a href="#" id="helpSupportBtn" class="block px-4 py-2 rounded-lg hover:bg-gray-50 text-gray-700 transition">
+                        <i class="fas fa-question-circle mr-3 text-gray-500"></i> Ayuda y soporte
+                    </a>
+                </div>
+                <div class="mt-6 pt-4 border-t border-gray-200">
+                    <button id="logoutBtn" class="w-full px-4 py-2 rounded-lg font-medium text-red-500 hover:bg-red-50 transition flex items-center justify-center">
+                        <i class="fas fa-sign-out-alt mr-2"></i> Cerrar sesión
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Preferences Modal -->
+        <div id="preferencesModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white rounded-xl shadow-lg w-full max-w-md mx-4 fade-in">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold text-gray-800 dark:text-white">Preferencias</h3>
+                        <button id="closePreferencesBtn" class="text-gray-400 hover:text-gray-500 dark:text-gray-300 dark:hover:text-gray-200">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <form id="preferencesForm" class="space-y-4">
+                        <div class="pt-2">
+                            <h4 class="font-medium text-gray-800 dark:text-gray-200 mb-2">Preferencias de notificación</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-center">
+                                    <input id="emailNotifications" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-500 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="emailNotifications" class="ml-3 block text-sm text-gray-700 dark:text-gray-300">Recordatorios por correo</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="pushNotifications" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-500 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="pushNotifications" class="ml-3 block text-sm text-gray-700 dark:text-gray-300">Notificaciones push</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="soundAlerts" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-500 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="soundAlerts" class="ml-3 block text-sm text-gray-700 dark:text-gray-300">Alertas de sonido</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="vibrationAlerts" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-500 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="vibrationAlerts" class="ml-3 block text-sm text-gray-700 dark:text-gray-300">Alertas de vibración</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="reminderBefore" type="number" min="0" max="60" class="w-16 px-2 py-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="reminderBefore" class="ml-3 block text-sm text-gray-700 dark:text-gray-300">Recordar (minutos antes)</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="pt-2">
+                            <h4 class="font-medium text-gray-800 dark:text-gray-200 mb-2">Foto de perfil</h4>
+                            <div class="flex items-center space-x-4">
+                                <div class="relative">
+                                    <img id="profilePhotoPreview" src="https://ui-avatars.com/api/?name=U&background=ef4444&color=fff" class="w-16 h-16 rounded-full object-cover">
+                                    <input type="file" id="profilePhotoUpload" accept="image/*" class="hidden">
+                                    <button type="button" id="changePhotoBtn" class="absolute -bottom-1 -right-1 bg-red-500 hover:bg-red-600 text-white rounded-full p-1.5">
+                                        <i class="fas fa-camera text-xs"></i>
+                                    </button>
+                                </div>
+                                <div>
+                                    <button type="button" id="removePhotoBtn" class="text-sm text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300">
+                                        Quitar foto
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-end space-x-3 pt-4">
+                            <button type="button" id="cancelPreferencesBtn" class="px-4 py-2 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-700">
+                                Cancelar
+                            </button>
+                            <button type="submit" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium transition dark:bg-red-600 dark:hover:bg-red-700">
+                                Guardar preferencias
+                            </button>
+                        </div>
+                    
+    <div class="flex items-center mt-4">
+      <input id="darkModeToggle" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-400 border-gray-300 rounded">
+      <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 dark:text-gray-100">
+        Activar modo oscuro
+      </label>
+    </div>
+    </form>
+    
+                </div>
+            </div>
+        </div>
+
+        <!-- Account Settings Modal -->
+        <div id="accountSettingsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white rounded-xl shadow-lg w-full max-w-md mx-4 fade-in">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold text-gray-800">Configuración de cuenta</h3>
                             <button id="closeAccountSettingsBtn" class="text-gray-400 hover:text-gray-500">
                                 <i class="fas fa-times"></i>
                             </button>
                         </div>
                         <form id="accountSettingsForm" class="space-y-4">
                             <div>
-                                <label for="accountName" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                                <label for="accountName" class="block text-sm font-medium text-gray-700 mb-1">Nombre Completo</label>
                                 <input type="text" id="accountName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
                             </div>
                             <div>
@@ -411,23 +757,23 @@
                                 <input type="email" id="accountEmail" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
                             </div>
                             <div>
-                                <label for="currentPassword" class="block text-sm font-medium text-gray-700 mb-1">Current Password</label>
+                                <label for="currentPassword" class="block text-sm font-medium text-gray-700 mb-1">Contraseña actual</label>
                                 <input type="password" id="currentPassword" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
                             </div>
                             <div>
-                                <label for="newPassword" class="block text-sm font-medium text-gray-700 mb-1">New Password</label>
+                                <label for="newPassword" class="block text-sm font-medium text-gray-700 mb-1">Nueva contraseña</label>
                                 <input type="password" id="newPassword" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
                             </div>
                             <div>
-                                <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-1">Confirm New Password</label>
+                                <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-1">Confirmar nueva contraseña</label>
                                 <input type="password" id="confirmPassword" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition">
                             </div>
                             <div class="flex justify-end space-x-3 pt-2">
                                 <button type="button" id="cancelAccountSettingsBtn" class="px-4 py-2 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition">
-                                    Cancel
+                                    Cancelar
                                 </button>
                                 <button type="submit" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium transition">
-                                    Save Changes
+                                    Guardar cambios
                                 </button>
                             </div>
                         
