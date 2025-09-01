@@ -81,7 +81,7 @@
         
     <div class="flex items-center mt-4">
       <input id="darkModeToggle" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-400 border-gray-300 rounded">
-      <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 dark:text-gray-100">
+      <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 ">
         Activar modo oscuro
       </label>
     </div>
@@ -124,7 +124,7 @@
         
     <div class="flex items-center mt-4">
       <input id="darkModeToggle" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-400 border-gray-300 rounded">
-      <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 dark:text-gray-100">
+      <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 ">
         Activar modo oscuro
       </label>
     </div>
@@ -261,7 +261,7 @@
                     
     <div class="flex items-center mt-4">
       <input id="darkModeToggle" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-400 border-gray-300 rounded">
-      <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 dark:text-gray-100">
+      <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 ">
         Activar modo oscuro
       </label>
     </div>
@@ -298,9 +298,10 @@
                     <p id="profilePanelEmail" class="text-gray-600 text-sm">usuario@ejemplo.com</p>
                 </div>
                 <div class="space-y-3">
-                    <a href="#" id="accountSettingsBtn" class="block px-4 py-2 rounded-lg hover:bg-gray-50 text-gray-700 transition">
-                        <i class="fas fa-user mr-3 text-gray-500"></i> Configuración de cuenta
-                    </a>
+                    <button id="accountSettingsBtn" 
+        class="block w-full text-left px-4 py-2 rounded-lg hover:bg-gray-50 text-gray-700 transition">
+  <i class="fas fa-user mr-3 text-gray-500"></i> Configuración de cuenta
+</button>
                     <a href="#" id="preferencesBtn" class="block px-4 py-2 rounded-lg hover:bg-gray-50 text-gray-700 transition">
                         <i class="fas fa-cog mr-3 text-gray-500"></i> Preferencias
                     </a>
@@ -321,40 +322,40 @@
             <div class="bg-white rounded-xl shadow-lg w-full max-w-md mx-4 fade-in">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-xl font-bold text-gray-800 dark:text-white">Preferencias</h3>
-                        <button id="closePreferencesBtn" class="text-gray-400 hover:text-gray-500 dark:text-gray-300 dark:hover:text-gray-200">
+                        <h3 class="text-xl font-bold text-gray-800 ">Preferencias</h3>
+                        <button id="closePreferencesBtn" class="text-gray-400 hover:text-gray-500  dark:hover:text-gray-200">
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
                     <form id="preferencesForm" class="space-y-4">
                         <div class="pt-2">
-                            <h4 class="font-medium text-gray-800 dark:text-gray-200 mb-2">Preferencias de notificación</h4>
+                            <h4 class="font-medium text-gray-800 mb-2">Preferencias de notificación</h4>
                             <div class="space-y-3">
                                 <div class="flex items-center">
                                     <input id="emailNotifications" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-500 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="emailNotifications" class="ml-3 block text-sm text-gray-700 dark:text-gray-300">Recordatorios por correo</label>
+                                    <label for="emailNotifications" class="ml-3 block text-sm text-gray-700">Recordatorios por correo</label>
                                 </div>
                                 <div class="flex items-center">
                                     <input id="pushNotifications" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-500 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="pushNotifications" class="ml-3 block text-sm text-gray-700 dark:text-gray-300">Notificaciones push</label>
+                                    <label for="pushNotifications" class="ml-3 block text-sm text-gray-700 ">Notificaciones push</label>
                                 </div>
                                 <div class="flex items-center">
                                     <input id="soundAlerts" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-500 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="soundAlerts" class="ml-3 block text-sm text-gray-700 dark:text-gray-300">Alertas de sonido</label>
+                                    <label for="soundAlerts" class="ml-3 block text-sm text-gray-700 ">Alertas de sonido</label>
                                 </div>
                                 <div class="flex items-center">
                                     <input id="vibrationAlerts" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-500 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="vibrationAlerts" class="ml-3 block text-sm text-gray-700 dark:text-gray-300">Alertas de vibración</label>
+                                    <label for="vibrationAlerts" class="ml-3 block text-sm text-gray-700 ">Alertas de vibración</label>
                                 </div>
                                 <div class="flex items-center">
                                     <input id="reminderBefore" type="number" min="0" max="60" class="w-16 px-2 py-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="reminderBefore" class="ml-3 block text-sm text-gray-700 dark:text-gray-300">Recordar (minutos antes)</label>
+                                    <label for="reminderBefore" class="ml-3 block text-sm text-gray-700 ">Recordar (minutos antes)</label>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="pt-2">
-                            <h4 class="font-medium text-gray-800 dark:text-gray-200 mb-2">Foto de perfil</h4>
+                            <h4 class="font-medium text-gray-800  mb-2">Foto de perfil</h4>
                             <div class="flex items-center space-x-4">
                                 <div class="relative">
                                     <img id="profilePhotoPreview" src="https://ui-avatars.com/api/?name=U&background=ef4444&color=fff" class="w-16 h-16 rounded-full object-cover">
@@ -380,12 +381,13 @@
                             </button>
                         </div>
                     
-    <div class="flex items-center mt-4">
-      <input id="darkModeToggle" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-400 border-gray-300 rounded">
-      <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 dark:text-gray-100">
-        Activar modo oscuro
-      </label>
-    </div>
+<div class="flex items-center mt-4">
+  <input id="darkModeToggle" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-400 border-gray-300 rounded">
+  <label for="darkModeToggle" class="ml-3 block text-sm text-gray-800">
+    Activar modo oscuro
+  </label>
+</div>
+
     </form>
     
                 </div>
@@ -426,7 +428,7 @@
         
     <div class="flex items-center mt-4">
       <input id="darkModeToggle" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-400 border-gray-300 rounded">
-      <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 dark:text-gray-100">
+      <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 ">
         Activar modo oscuro
       </label>
     </div>
@@ -469,7 +471,7 @@
         
     <div class="flex items-center mt-4">
       <input id="darkModeToggle" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-400 border-gray-300 rounded">
-      <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 dark:text-gray-100">
+      <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 ">
         Activar modo oscuro
       </label>
     </div>
@@ -606,7 +608,7 @@
                     
     <div class="flex items-center mt-4">
       <input id="darkModeToggle" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-400 border-gray-300 rounded">
-      <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 dark:text-gray-100">
+      <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 ">
         Activar modo oscuro
       </label>
     </div>
@@ -632,34 +634,7 @@
             </div>
         </div>
 
-        <!-- Profile Panel -->
-        <div id="profilePanel" class="fixed top-16 right-4 bg-white rounded-xl shadow-lg w-80 z-50 hidden fade-in">
-            <div class="p-6">
-                <div class="flex flex-col items-center mb-4">
-                    <div class="w-16 h-16 rounded-full bg-red-500 flex items-center justify-center text-white text-2xl font-medium mb-3">
-                        <span id="profilePanelInitial">U</span>
-                    </div>
-                    <h3 id="profilePanelName" class="font-bold text-gray-800 text-lg">Nombre de usuario</h3>
-                    <p id="profilePanelEmail" class="text-gray-600 text-sm">usuario@ejemplo.com</p>
-                </div>
-                <div class="space-y-3">
-                    <a href="#" id="accountSettingsBtn" class="block px-4 py-2 rounded-lg hover:bg-gray-50 text-gray-700 transition">
-                        <i class="fas fa-user mr-3 text-gray-500"></i> Configuración de cuenta
-                    </a>
-                    <a href="#" id="preferencesBtn" class="block px-4 py-2 rounded-lg hover:bg-gray-50 text-gray-700 transition">
-                        <i class="fas fa-cog mr-3 text-gray-500"></i> Preferencias
-                    </a>
-                    <a href="#" id="helpSupportBtn" class="block px-4 py-2 rounded-lg hover:bg-gray-50 text-gray-700 transition">
-                        <i class="fas fa-question-circle mr-3 text-gray-500"></i> Ayuda y soporte
-                    </a>
-                </div>
-                <div class="mt-6 pt-4 border-t border-gray-200">
-                    <button id="logoutBtn" class="w-full px-4 py-2 rounded-lg font-medium text-red-500 hover:bg-red-50 transition flex items-center justify-center">
-                        <i class="fas fa-sign-out-alt mr-2"></i> Cerrar sesión
-                    </button>
-                </div>
-            </div>
-        </div>
+        
 
         <!-- Preferences Modal -->
         <div id="preferencesModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
@@ -681,11 +656,11 @@
                                 </div>
                                 <div class="flex items-center">
                                     <input id="pushNotifications" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-500 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="pushNotifications" class="ml-3 block text-sm text-gray-700 dark:text-gray-300">Notificaciones push</label>
+                                    <label for="pushNotifications" class="ml-3 block text-sm text-gray-700 ">Notificaciones push</label>
                                 </div>
                                 <div class="flex items-center">
                                     <input id="soundAlerts" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-500 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="soundAlerts" class="ml-3 block text-sm text-gray-700 dark:text-gray-300">Alertas de sonido</label>
+                                    <label for="soundAlerts" class="ml-3 block text-sm text-gray-700 ">Alertas de sonido</label>
                                 </div>
                                 <div class="flex items-center">
                                     <input id="vibrationAlerts" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-500 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600">
@@ -699,7 +674,7 @@
                         </div>
                         
                         <div class="pt-2">
-                            <h4 class="font-medium text-gray-800 dark:text-gray-200 mb-2">Foto de perfil</h4>
+                            <h4 class="font-medium text-gray-800  mb-2">Foto de perfil</h4>
                             <div class="flex items-center space-x-4">
                                 <div class="relative">
                                     <img id="profilePhotoPreview" src="https://ui-avatars.com/api/?name=U&background=ef4444&color=fff" class="w-16 h-16 rounded-full object-cover">
@@ -727,7 +702,7 @@
                     
     <div class="flex items-center mt-4">
       <input id="darkModeToggle" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-400 border-gray-300 rounded">
-      <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 dark:text-gray-100">
+      <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 ">
         Activar modo oscuro
       </label>
     </div>
@@ -738,7 +713,7 @@
         </div>
 
         <!-- Account Settings Modal -->
-        <div id="accountSettingsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div id="accountSettingsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-60 hidden">
             <div class="bg-white rounded-xl shadow-lg w-full max-w-md mx-4 fade-in">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-4">
@@ -779,7 +754,7 @@
                         
         <div class="flex items-center mt-4">
           <input id="darkModeToggle" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-400 border-gray-300 rounded">
-          <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 dark:text-gray-100">
+          <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 ">
             Activar modo oscuro
           </label>
         </div>
@@ -877,15 +852,15 @@
         const sampleNotifications = [
             {
                 id: 1,
-                message: "Time to take Ibuprofen (200mg)",
-                time: "2 minutes ago",
+                message: "Hora de tomar Ibuprofeno (200mg)",
+                time: "Hace 2 minutos",
                 read: false,
                 medicationId: 1
             },
             {
                 id: 2,
-                message: "Don't forget your Vitamin D supplement today",
-                time: "1 hour ago",
+                message: "No olvides tu suplemento de vitamina D hoy",
+                time: "Hace 1 hora",
                 read: false,
                 medicationId: 2
             }
@@ -1069,16 +1044,16 @@
                 // Only notify if we haven't already for this medication today
                 const alreadyNotified = notifications.some(n => 
                     n.medicationId === nextMedication.id && 
-                    n.message.includes('Time to take') &&
+                    n.message.includes('Hora de tomar') &&
                     n.time.includes('minute') // Simple check to avoid duplicate same-day notifications
                 );
                 
                 if (!alreadyNotified) {
-                    addNotification(`Time to take ${nextMedication.name} (${nextMedication.dose})`);
+                    addNotification(`Hora de tomar ${nextMedication.name} (${nextMedication.dose})`);
                     
                     // In a real app, you might also trigger a browser notification here
                     if (Notification.permission === 'granted') {
-                        new Notification(`Time to take ${nextMedication.name}`, {
+                        new Notification(`Hora de tomar ${nextMedication.name}`, {
                             body: `Dosage: ${nextMedication.dose}`,
                             icon: 'https://cdn-icons-png.flaticon.com/512/3146/3146770.png'
                         });
@@ -1111,7 +1086,7 @@
             const diffMs = now - date;
             const diffMins = Math.round(diffMs / 60000);
             
-            if (diffMins < 1) return 'just now';
+            if (diffMins < 1) return 'Justo ahora';
             if (diffMins < 60) return `${diffMins} minute${diffMins === 1 ? '' : 's'} ago`;
             
             const diffHours = Math.round(diffMins / 60);
@@ -1183,37 +1158,38 @@
     // ...existing code...
 
 function loginUser(email, password, name = null) {
-    // In a real app, this would be an API call
+    // En una app real esto sería un llamado a la API
     console.log('Logging in with:', email, password);
 
-    // For demo purposes, create a user
+    // Usuario de demo
     user = {
         name: name || "Usuario Demo",
         email: email,
         initial: (name ? name.charAt(0) : email.charAt(0)).toUpperCase()
     };
 
-    // Update UI
+    // Actualizar UI
     userName.textContent = user.name;
     profileInitial.textContent = user.initial;
     profilePanelInitial.textContent = user.initial;
     profilePanelName.textContent = user.name;
     profilePanelEmail.textContent = user.email;
 
-    // Hide login screen and show app
-    loginScreen.classList.add('opacity-0', 'pointer-events-none');
+    // 🔴 Aquí el cambio: ocultar login con .hidden en lugar de opacity
+    loginScreen.classList.add('hidden');
     appContainer.classList.remove('hidden');
 
-    // Initialize the app
+    // Inicializar app
     initApp();
 
-    // Request notification permission
+    // Pedir permisos de notificación
     if (Notification.permission !== 'denied') {
         Notification.requestPermission();
     }
 
     return true;
 }
+
 
 function signupUser(name, email, password) {
     // In a real app, this would be an API call
@@ -1226,32 +1202,37 @@ function signupUser(name, email, password) {
 // ...existing code...
 
         // Logout user
-        function logoutUser() {
-            user = null;
-            medications = [];
-            notifications = [];
-            
-            // Hide app and show login screen
-            appContainer.classList.add('hidden');
-            loginScreen.classList.remove('opacity-0', 'pointer-events-none');
-            
-            // Reset forms
-            loginForm.reset();
-            signupForm.reset();
-        }
+       function logoutUser() {
+    user = null;
+    medications = [];
+    notifications = [];
 
-        // Event Listeners
-        showSignup.addEventListener('click', (e) => {
-            e.preventDefault();
-            loginScreen.classList.add('opacity-0', 'pointer-events-none');
-            signupScreen.classList.remove('opacity-0', 'pointer-events-none');
-        });
+    // Ocultar la app y volver a mostrar el login
+    appContainer.classList.add('hidden');
+    loginScreen.classList.remove('hidden');
 
-        showLogin.addEventListener('click', (e) => {
-            e.preventDefault();
-            signupScreen.classList.add('opacity-0', 'pointer-events-none');
-            loginScreen.classList.remove('opacity-0', 'pointer-events-none');
-        });
+    // Resetear formularios
+    loginForm.reset();
+    signupForm.reset();
+}
+
+
+// Event Listeners
+showSignup.addEventListener('click', (e) => {
+    e.preventDefault();
+    loginScreen.classList.add('hidden');   // ocultar login
+    signupScreen.classList.remove('hidden'); // mostrar signup
+});
+
+showLogin.addEventListener('click', (e) => {
+    e.preventDefault();
+    signupScreen.classList.add('hidden');
+    if (!user) { // Solo mostrar login si NO hay sesión activa
+        loginScreen.classList.remove('hidden');
+    }
+});
+
+
 
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -1360,17 +1341,19 @@ signupForm.addEventListener('submit', (e) => {
         });
 
         // Account Settings Event Listeners
-        accountSettingsBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            profilePanel.classList.add('hidden');
-            accountSettingsModal.classList.remove('hidden');
-            
-            // Populate form with current user data
-            if (user) {
-                accountName.value = user.name;
-                accountEmail.value = user.email;
-            }
-        });
+ accountSettingsBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    profilePanel.classList.add("hidden");
+    accountSettingsModal.classList.remove("hidden");
+
+    if (user) {
+        accountName.value = user.name;
+        accountEmail.value = user.email;
+    }
+});
+
 
         closeAccountSettingsBtn.addEventListener('click', () => {
             accountSettingsModal.classList.add('hidden');
@@ -1425,7 +1408,7 @@ helpSupportModal.innerHTML = `
     <div class="bg-white rounded-xl shadow-lg w-full max-w-lg mx-4 fade-in max-h-[80vh] overflow-y-auto">
         <div class="p-6">
             <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold text-gray-800">Help & Support</h3>
+                <h3 class="text-xl font-bold text-gray-800">Ayuda & Soporte</h3>
                 <button id="closeHelpModalBtn" class="text-gray-400 hover:text-gray-500">
                     <i class="fas fa-times"></i>
                 </button>
@@ -1433,20 +1416,21 @@ helpSupportModal.innerHTML = `
             <div class="space-y-6">
                 <!-- FAQ -->
                 <div>
-                    <h4 class="font-medium text-gray-900 mb-2">Frequently Asked Questions</h4>
+                    <h4 class="font-medium text-gray-900 mb-2">Preguntas frecuentes
+</h4>
                     <details class="border rounded-lg p-3 mb-2">
-                        <summary class="cursor-pointer font-medium text-gray-800">How do I add a new medication?</summary>
+                        <summary class="cursor-pointer font-medium text-gray-800">¿Cómo agrego una nueva medicación?</summary>
                         <p class="mt-2 text-sm text-gray-600">Go to "Add Medication", fill the form and click save.</p>
                     </details>
                     <details class="border rounded-lg p-3 mb-2">
-                        <summary class="cursor-pointer font-medium text-gray-800">Can I edit or delete a medication?</summary>
+                        <summary class="cursor-pointer font-medium text-gray-800">¿Puedo editar o eliminar una medicación?</summary>
                         <p class="mt-2 text-sm text-gray-600">Yes, click "Edit" on the medication card. Delete will be added soon.</p>
                     </details>
                 </div>
 
                 <!-- Contact Form -->
                 <div>
-                    <h4 class="font-medium text-gray-900 mb-2">Contact Support</h4>
+                    <h4 class="font-medium text-gray-900 mb-2">Contactar con soporte</h4>
                     <form id="supportForm" class="space-y-3">
                         <input type="text" id="supportName" placeholder="Your Name" required
                             class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-red-500">
@@ -1461,7 +1445,7 @@ helpSupportModal.innerHTML = `
                     
         <div class="flex items-center mt-4">
           <input id="darkModeToggle" type="checkbox" class="h-4 w-4 text-red-500 focus:ring-red-400 border-gray-300 rounded">
-          <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900 dark:text-gray-100">
+          <label for="darkModeToggle" class="ml-3 block text-sm text-gray-900">
             Activar modo oscuro
           </label>
         </div>
@@ -1476,7 +1460,7 @@ helpSupportModal.innerHTML = `
                         class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-red-500"></textarea>
                     <button id="sendFeedbackBtn"
                         class="mt-2 px-4 py-2 bg-gray-800 hover:bg-gray-900 text-white rounded-lg font-medium">
-                        Send Feedback
+                        Enviar Feedback
                     </button>
                 </div>
             </div>
@@ -1595,7 +1579,7 @@ function loadPreferences() {
             localStorage.setItem('reminderBefore', document.getElementById('reminderBefore').value);
             
             // Show success message
-            addNotification("Preferences saved successfully");
+            addNotification("Preferencias guardadas correctamente");
             
             // Update medication reminders with new settings
             checkMedicationReminders();
@@ -1623,7 +1607,7 @@ function loadPreferences() {
                 // Only notify if we haven't already for this medication today
                 const alreadyNotified = notifications.some(n => 
                     n.medicationId === nextMedication.id && 
-                    n.message.includes('Time to take') &&
+                    n.message.includes('Hora de tomar ') &&
                     n.time.includes('minute')
                 );
                 
@@ -1726,6 +1710,7 @@ function loadPreferences() {
             saveTheme();
             preferencesModal.classList.add('hidden');
         });
+        
 
         // Initialize current time display
         updateCurrentTime();
